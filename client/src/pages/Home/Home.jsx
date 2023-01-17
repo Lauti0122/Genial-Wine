@@ -63,7 +63,7 @@ export  function Home() {
       <button type="button" onClick={getInfo}>Get info</button>
 
       {
-        wines.map(wine => (
+        wines?.map(wine => (
           <p>{wine.nombre}</p>
         ))
       }
