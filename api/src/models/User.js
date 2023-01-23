@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
         address: {
             type: DataTypes.STRING
         },
-        postalCode: {
+        cp: {
             type: DataTypes.STRING
         },
         phone: {
