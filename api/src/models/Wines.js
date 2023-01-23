@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
     // defino el modelo
-    sequelize.define('user', {
+    sequelize.define('wine', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
@@ -14,38 +14,47 @@ module.exports = (sequelize) => {
             allowNull: false,
 
         },
-        lastname: {
-            type: DataTypes.STRING,
+        price: {
+            type: DataTypes.FLOAT,
             allowNull: false,
 
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
-        },
-        city: {
-            type: DataTypes.STRING
         },
         country: {
-            type: DataTypes.STRING
-        },
-        address: {
-            type: DataTypes.STRING
-        },
-        postalCode: {
-            type: DataTypes.STRING
-        },
-        phone: {
             type: DataTypes.STRING,
+            allowNull: false,
         },
-        birthday: {
+        region: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        type: {
+            type: DataTypes.ENUM("red", "white", "rose")
+        },
+        grape_type: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        description: {
             type: DataTypes.STRING,
 
         },
-        photo: {
-            type: DataTypes.STRING
-        }
+        stock: {
+            type: DataTypes.STRING,
+            allowNull: false,
+
+        },
+        capacity: {
+            type: DataTypes.STRING,
+
+        },
+        year: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        images: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+        },
+
     }, {
         timestamps: false,
     });
