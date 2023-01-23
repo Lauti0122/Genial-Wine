@@ -11,11 +11,11 @@ export default function App() {
 <>
     <NavBar/>
     <Routes>
-      <Route path='/' element={<Home/>}/>
-      {/* <Route path="/auth"> */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      {/* </Route> */}
+      <Route index element={<Home/>}/>
+      <Route path="/auth/*" element={<Login />}> 
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+      </Route>
       <Route path='/wines' element={<Wines/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='*' element={<NotFound/>}/>
