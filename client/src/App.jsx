@@ -1,7 +1,8 @@
-import './App.css'
-import { Routes, Route} from 'react-router-dom'
-import {Home, About, NotFound, Wines} from './pages'
-import {NavBar} from './components/NavBar'
+import './App.css';
+import { Routes, Route} from 'react-router-dom';
+import { Home, About, NotFound, Wines } from './pages';
+import { Login, Register } from "./pages/Auth";
+import { NavBar } from './components/NavBar';
 
 export default function App() {
 
@@ -10,7 +11,11 @@ export default function App() {
 <>
     <NavBar/>
     <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route index element={<Home/>}/>
+      <Route path="/auth/*" element={<Login />}> 
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+      </Route>
       <Route path='/wines' element={<Wines/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='*' element={<NotFound/>}/>
