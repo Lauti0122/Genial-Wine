@@ -1,0 +1,109 @@
+@api = http://localhost:4000/api
+
+### Wine 1
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name": "El enemigo",
+  "price": 20.5,
+  "country": "Mendoza, Argentina",
+  "region": "Lujan de Cuyo y Valle de Uco",
+  "type": "red",
+  "grape_type": ["Malbec"],
+  "description": "Vino con cuerpo y aromas frutales",
+  "stock": 20,
+  "capacity": "750ml",
+  "year": "2020",
+  "images": ["image"]
+}
+
+### Wine 2
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name": "La Poderosa Cabernet Franc Merlot",
+  "price": 18.2,
+  "country": "Neuquen, Argentina",
+  "region": "San Patricio del Chañar",
+  "type": "red",
+  "grape_type": ["Cabernet Franc", "Merlot"],
+  "description": "En nariz premia con notas de pimiento asado al frente, acompañadas por un buen colchón de frutas rojas y negras. La madera hace su parte, con los característicos trazos de vainilla, tabaco y un sutil tostado.",
+  "stock": 20,
+  "capacity": "750ml",
+  "year": "2019",
+  "images": ["https://www.espaciovino.com.ar/media/default/0001/53/thumb_52733_default_big.jpeg"]
+}
+
+### Wine 3
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name": "Alamos Red Blend",
+  "price": 14,
+  "country": "Mendoza, Argentina",
+  "region": "Lujan de Cuyo y Valle de Uco",
+  "type": "red",
+  "grape_type": ["Malbec", "Cabernet Franc", "Petit Verdot"],
+  "description": "Es un vino exótico: frutado en rojo, bien intenso, y con un trazo expectorante que, una vez en el paladar, aporta delgadez y tensión.",
+  "stock": 10,
+  "capacity": "500ml",
+  "year": "2017",
+  "images": ["https://www.espaciovino.com.ar/media/default/0001/64/thumb_63693_default_big.jpeg"]
+}
+
+### Wine 4
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name": "El Abuelo Oporto",
+  "price": 12,
+  "country": "Mendoza, Argentina",
+  "region": "Lujan de Cuyo y Valle de Uco",
+  "type": "red",
+  "grape_type": ["Oporto"],
+  "description": "El Oporto se caracteriza por su gran intensidad aromática, la presencia del alcohol, su dulzura y la tonicidad en algunas de sus categorías.",
+  "stock": 10,
+  "capacity": "750ml",
+  "year": "2021",
+  "images": ["https://www.espaciovino.com.ar/media/default/0001/64/thumb_63809_default_big.jpeg"]
+}
+
+### Wine 5
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name": "Trumpeter Chardonnay",
+  "price": 22,
+  "country": "Mendoza, Argentina",
+  "region": "Tupungato",
+  "type": "white",
+  "grape_type": ["Chardonnay"],
+  "description": "Intenso color amarillo verdoso. Los primeros aromas que impactan en la nariz recuerdan a fruta madura de carozo (durazno) con un toque de vainilla, proveniente de la crianza en roble. Redondo y suave, en boca, entrega dejos a frutos tropicales (ananás) combinados con un fino marco mineral.",
+  "stock": 20,
+  "capacity": "750ml",
+  "year": "2015",
+  "images": ["https://www.espaciovino.com.ar/media/default/0001/62/thumb_61971_default_big.jpeg"]
+}
+
+### Wine 6
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name": "La Flor Malbec Rosé",
+  "price": 18.6,
+  "country": "Mendoza, Argentina",
+  "region": "Alto Agrelo, Luján de Cuyo",
+  "type": "rose",
+  "grape_type": ["Malbec"],
+  "description": "Nuestro Malbec Rosé posee un color tenue y brillante, su aroma es fresco y frutal de gran intensidad. Delicado al paladar, con expresiones que recuerdan a jalea de membrillos, típica de los Malbec de Alto Agrelo. Posee un final redondo, fresco y equilibrado.",
+  "stock": 14,
+  "capacity": "750ml",
+  "year": "2019",
+  "images": ["https://www.espaciovino.com.ar/media/default/0001/55/thumb_54222_default_big.jpeg"]
+}
