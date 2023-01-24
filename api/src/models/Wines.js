@@ -39,7 +39,7 @@ module.exports = (sequelize) => {
 
         },
         stock: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
 
         },
