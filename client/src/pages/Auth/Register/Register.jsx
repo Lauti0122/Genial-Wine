@@ -1,59 +1,100 @@
-import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../../firebase';
-import { v4 as uuid } from "uuid";
+import React from 'react'
+import {Container, Form, Button} from 'semantic-ui-react'
+import {useFormik} from 'formik'
+import {initialValues, validationSchema} from './Register.data'
+import {auth} from '../../../firebase'
+import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {useDispatch} from 'react-redux'
+import {postUser} from '../../../redux/actions'
 
-export function Register() {
+export  function Register() {
 
-  const [input, setInput] = useState({
-    id: "",
-    email: "",
-    nombre: "",
-    apellido: "",
-    contra: "",
-    pais: "",
-    ciudad: ""
-  });
-
-  const handleChange = (e) => {
-    setInput({...input, [e.target.name]: e.target.value});
-  }
+  const dispatch = useDispatch()
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema:validationSchema(),
+    onSubmit: async (formValue)=>{
+      try{
+        await createUserWithEmailAndPassword(auth, formValue.email, formValue.password);
+        dispatch(postUser({
+        name:formValue.name,
+        lastname:formValue.lastname,
+        email:formValue.email,
+        country:formValue.country
+        }))
+      }catch(error){
+        //MOSTRAR ERROR
+        if (error.code === 'auth/email-already-in-use') console.log("Email already exists");
+      }
 
-    try {
-      const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, input.email, input.contra);
-      //Crear el documento de usuario
-      input.id = uuid();
-      const myDB = doc(db, "users", input.id);
-      await setDoc(myDB, input);
     }
-    catch (error) {
-      if (error.code === 'auth/email-already-in-use') console.log("Email ya en uso");
-    }
-  }
+  })
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type="email" name="email" value={input.email} onChange={handleChange} />
-        <label>Nombre</label>
-        <input type="text" name="nombre" value={input.nombre} onChange={handleChange} />
-        <label>Apellido</label>
-        <input type="text" name="apellido" value={input.apellido} onChange={handleChange} />
-        <label>Contraseña</label>
-        <input type="password" name="contra" value={input.contra} onChange={handleChange} />
-        <label>Pais</label>
-        <input type="text" name="pais" value={input.pais} onChange={handleChange} />
-        <label>Ciudad</label>
-        <input type="text" name="ciudad" value={input.ciudad} onChange={handleChange} />
-        <button>Enviar</button>
-      </form>
-    </>
+    <Container
+    style={{
+      textAlign:"center",
+      display:"flex",
+      alignItems:"center",
+      flexDirection:"column",
+      justifyContent:"center",
+      height: "100vh"
+    }}>
+      <h1>Register</h1>
+    <Form style={{width:"30%"}} onSubmit={formik.handleSubmit}>
+    <Form.Input
+     type='text' 
+     placeholder="Name..." 
+     name="name" 
+     onChange={formik.handleChange} 
+     error={formik.errors.name && true}
+     />
+
+    <Form.Input
+     type='text' 
+     placeholder="Lastname..." 
+     name="lastname" 
+     onChange={formik.handleChange} 
+     error={formik.errors.lastname && true}
+     />
+    <Form.Input
+     type='text' 
+     placeholder="Country..." 
+     name="country" 
+     onChange={formik.handleChange} 
+     error={formik.errors.country && true}
+     />
+
+    <Form.Input 
+    type='text' 
+    placeholder="Email..." 
+    name="email" 
+    onChange={formik.handleChange} 
+    error={formik.errors.email && true}
+    />
+
+    <Form.Input 
+    type='password' 
+    placeholder="Password..." 
+    name="password" 
+    onChange={formik.handleChange} 
+    error={formik.errors.password && true}
+    />
+
+    <Form.Input 
+    type='password' 
+    placeholder="Repeat Password..." 
+    name="repeatPassword" 
+    onChange={formik.handleChange} 
+    error={formik.errors.repeatPassword && true}
+    />
+
+    <Button type='submit'>Register</Button>
+
+    </Form>
+
+    </Container>
   )
 }
