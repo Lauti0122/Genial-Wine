@@ -12,7 +12,7 @@ export default function App() {
     <NavBar/>
     <Routes>
       <Route index element={<Home/>}/>
-      <Route path="/auth/*" element={<Login />}> 
+      <Route path="/auth/*"> 
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Route>
