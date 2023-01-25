@@ -2,15 +2,15 @@ const { User } = require("../db");
 
 const postUser = async (req, res) => {
   try {
-    const { name, lastname, email, country, city } = req.body;
-  
-    if (!name || !lastname || !email || !country || !city) return res.status(400).json({ message: "Missing data" });
-  
+    const { name, lastname, email, country } = req.body;
+
+    if (!name || !lastname || !email || !country) return res.status(400).json({ message: "Missing data" });
+
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) return res.status(400).json({ message: "Invalid email" });
 
-    const emailExists = await User.findOne({ where: { email }});
+    const emailExists = await User.findOne({ where: { email } });
     if (emailExists) return res.status(400).json({ message: "User already exists" });
-  
+
     const newUser = await User.create(req.body);
     return res.status(201).json(newUser);
   }
@@ -23,10 +23,10 @@ const getUser = async (req, res) => {
   try {
     const { email } = req.params;
 
-    const user = await User.findOne({ where: { email }});
+    const user = await User.findOne({ where: { email } });
 
     if (!user) return res.status(400).json({ message: "User not found" });
-  
+
     return res.json(user);
   }
   catch (error) {
@@ -38,10 +38,10 @@ const updateUser = async (req, res) => {
   try {
     const { email: paramEmail } = req.params;
     const { city, cp, address, birthday, phone, photo } = req.body;
-    
-    const userExists = await User.findOne({ where: { email: paramEmail }});
 
-    if (!userExists) return res.status(400).json({ message: "User not found"});
+    const userExists = await User.findOne({ where: { email: paramEmail } });
+
+    if (!userExists) return res.status(400).json({ message: "User not found" });
 
     const updatedUser = await User.update(
       {
@@ -51,10 +51,10 @@ const updateUser = async (req, res) => {
         birthday: birthday,
         phone: phone,
         photo: photo
-      }, { where: { email: paramEmail }}
+      }, { where: { email: paramEmail } }
     );
 
-    updatedUser ? res.json({message: "Data updated successfully"}) : res.json({ message: "The data has not been updated" });
+    updatedUser ? res.json({ message: "Data updated successfully" }) : res.json({ message: "The data has not been updated" });
   }
   catch (error) {
 
