@@ -15,6 +15,7 @@ export  function Register() {
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema:validationSchema(),
+
     onSubmit: async (formValue)=>{
       try{
         await createUserWithEmailAndPassword(auth, formValue.email, formValue.password);
@@ -24,9 +25,20 @@ export  function Register() {
         email:formValue.email,
         country:formValue.country
         }))
+        console.log("user registered")
+       
       }catch(error){
         //MOSTRAR ERROR
-        if (error.code === 'auth/email-already-in-use') console.log("Email already exists");
+        if (error.code === 'auth/email-already-in-use'){
+          console.log("email aleady exists")
+        }
+        if(error.code === 'auth/weak-password'){
+          console.log("Password should be at least 6 characters")
+        }
+        else{
+          console.log(error.code)
+        }
+       
       }
 
     }
@@ -80,7 +92,7 @@ export  function Register() {
     placeholder="Password..." 
     name="password" 
     onChange={formik.handleChange} 
-    error={formik.errors.password && true}
+    error={formik.errors.password }
     />
 
     <Form.Input 

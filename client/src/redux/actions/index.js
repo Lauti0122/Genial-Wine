@@ -14,7 +14,7 @@ export function postUser(user) {
 
         }
         catch (error) {
-            console.log(error)
+            console.log({ message: error.message })
         }
     }
 }

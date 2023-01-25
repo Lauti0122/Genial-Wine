@@ -1,43 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../../firebase';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+import {Container, Form, Button} from 'semantic-ui-react';
+import {useFormik} from 'formik';
+import {initialValues, validationSchema} from './Login.data'
+import {useDispatch} from 'react-redux'
 
-export function Login() {
-
-  const [input, setInput] = useState({
-    email: "",
-    contra: ""
-  })
+export  function Login() {
 
   const [logged, setLogged] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
-  }, [])
-  
+        onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
+      }, [])
 
-  const handleChange = (e) => {
-    setInput({...input, [e.target.name]: e.target.value})
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const result = await signInWithEmailAndPassword(auth, input.email, input.contra);
-      console.log(result);
-    }
-    catch (error) {
-      console.log(error)
-    }
-  }
-
-  const loginGoogle = async () => {
+ const loginGoogle = async () => {
     try { 
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
 
       console.log(result.user);
+      let fullName = result.user.displayName
+      fullName = fullName.split(" ")
+      
+      // dispatch(postUser({
+      //     name: fullName[0],
+      //     lastname: fullName[1],
+      //     email: result.user.email
+      // }))
+      
+      
     }
     catch (error) {
       console.log(error);
@@ -48,18 +41,62 @@ export function Login() {
     await signOut(auth);
   }
 
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
+
+    onSubmit: async (formValue)=>{
+        try {
+                const result = await signInWithEmailAndPassword(auth, formValue.email, formValue.password);
+                console.log(result, "logueado");
+              
+      }catch(error){
+        if(error.code === 'auth/user-not-found'){
+          console.log("User not found")
+        }
+        if(error.code === 'auth/wrong-password'){
+          console.log("Incorrect password")
+        }
+        else{
+          console.log(error.code);
+        }
+      }
+    }
+  })
+
   return (
-    <>
+    <Container
+    style={{
+      textAlign:"center",
+      display:"flex",
+      alignItems:"center",
+      flexDirection:"column",
+      justifyContent:"center",
+      height: "100vh"
+    }}>
+      <h1>Login</h1>
       {logged ? "Iniciado" : "No iniciado"}
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type="email" name="email" value={input.email} onChange={handleChange} />
-        <label>Contraseña</label>
-        <input type="password" name="contra" value={input.contra} onChange={handleChange} />
-        <button>Enviar</button>
-      </form>
-      <p>Crack! tambien te podes unir con google <button type="button" onClick={loginGoogle}>Soy GOOGLE</button></p>
-      <p><button type="button" onClick={logout}>Deslogearse</button></p>
-    </>
+    <Form  style={{width:"30%"}} onSubmit={formik.handleSubmit}>
+
+    <Form.Input
+     type='text' 
+     placeholder="email..." 
+     name="email" 
+     onChange={formik.handleChange} 
+     error={formik.errors.email && true}
+    />
+
+    <Form.Input
+     type='password' 
+     placeholder="password..." 
+     name="password" 
+     onChange={formik.handleChange} 
+     error={formik.errors.password && true}
+    />
+    <Button type='submit'>Login</Button>
+    </Form>
+    <br />
+    <Button onClick={loginGoogle}>Login with Google</Button>
+    </Container>
   )
 }
