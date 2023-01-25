@@ -1,15 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { doc, setDoc, collection, getDocs } from 'firebase/firestore'
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { v4 as uuid } from "uuid";
-import { NavBar } from '../../components/NavBar';
+import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsers, postUser } from "../../redux/actions";
+
 
 export  function Home() {
-  
-  
+
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.users);
+  const [ loginInfo, setLoginInfo ] = useState({});
+
   const [ input, setInput ] = useState({
     id: "",
-    nombre: "",
+    nombre: "", 
     anio: "",
     tipo: ""
   });
@@ -46,6 +52,26 @@ export  function Home() {
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   } 
+  
+  useEffect(() => {
+    dispatch(getUsers());
+    onAuthStateChanged(auth, (user) => {
+      let fullname = user.displayName.split(" ");
+      setLoginInfo({
+        name: fullname[0],
+        lastname: fullname[1],
+        email: user.email
+      })
+    })
+  }, [])
+
+  useEffect(() => {
+    if (loginInfo.hasOwnProperty("name")) {
+      const userFound = users?.find(u => u.email === loginInfo.email);
+      if (!userFound) dispatch(postUser(loginInfo));
+    }
+  }, [loginInfo])
+  
 
   return (
     <>

@@ -1,44 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../../firebase';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
-import {Container, Form, Button} from 'semantic-ui-react';
-import {useFormik} from 'formik';
-import {initialValues, validationSchema} from './Login.data'
-import {useDispatch} from 'react-redux'
-import {postUser} from '../../../redux/actions/index'
-import { Link } from 'react-router-dom'
+import { Container, Form, Button } from 'semantic-ui-react';
+import { useFormik } from 'formik';
+import { useNavigate } from "react-router-dom";
+import { initialValues, validationSchema } from './Login.data'
+
 
 export  function Login() {
 
   const [logged, setLogged] = useState(false);
-  const dispatch = useDispatch();
 
+  const navigate = useNavigate();
 
   useEffect(() => {
-        onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
-      }, [])
-      
-    
+    onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
+  }, [])
+
+
  const loginGoogle = async () => {
 
     try { 
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-
-      let fullName = result.user.displayName
-      fullName = fullName.split(" ")
-
-      
-      dispatch(postUser({
-          name: fullName[0],
-          lastname: fullName[1],
-          email: result.user.email,
-          country:"Argentina"
-          
-      }))
-      
-
-    
+      await signInWithPopup(auth, provider);
+      navigate('/');
     }
     catch (error) {
       console.log(`error1: ${error}`);

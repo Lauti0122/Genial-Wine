@@ -1,13 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const POST_USER = 'POST_USER';
-export const GET_USER = 'GET_USER';
+export const POST_USER = "POST_USER";
+export const GET_USERS = "GET_USERS";
+export const GET_USER = "GET_USER";
 
 export function postUser(user) {
 
     return async function (dispatch) {
         try {
-            const newUser = await axios.post("/api/auth/register", user)
+            const newUser = await axios.post("/auth/register", user)
 
             return dispatch({
                 type: POST_USER,
@@ -21,18 +22,32 @@ export function postUser(user) {
     }
 }
 
+export function getUsers() {
+  return async function (dispatch) {
+    try {
+      const users = await axios.get("/auth/users");
+      return dispatch({
+        type: GET_USERS,
+        payload: users.data
+      })
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+}
+
 export function getUserByEmail(email) {
     return async function (dispatch) {
         try {
-            const user = await axios.get(`/users/${email}`);
-
+            const user = await axios.get(`/auth/user/${email}`);
             return dispatch({
                 type: GET_USER,
                 payload: user.data
             })
         }
         catch (error) {
-            console.log(error);
+          console.log(error);
         }
     }
 }
