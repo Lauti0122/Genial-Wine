@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { doc, setDoc, collection, getDocs } from 'firebase/firestore'
 import { db } from "../../firebase";
 import { v4 as uuid } from "uuid";
+import { NavBar } from '../../components/NavBar';
 
 export  function Home() {
   

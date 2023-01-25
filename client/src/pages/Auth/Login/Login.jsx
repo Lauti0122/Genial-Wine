@@ -6,6 +6,7 @@ import {useFormik} from 'formik';
 import {initialValues, validationSchema} from './Login.data'
 import {useDispatch} from 'react-redux'
 import {postUser} from '../../../redux/actions/index'
+import { Link } from 'react-router-dom'
 
 export  function Login() {
 
@@ -13,12 +14,11 @@ export  function Login() {
   const dispatch = useDispatch();
 
 
-
   useEffect(() => {
         onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
-    
       }, [])
-
+      
+    
  const loginGoogle = async () => {
 
     try { 
@@ -36,6 +36,8 @@ export  function Login() {
           country:"Argentina"
           
       }))
+      
+
     
     }
     catch (error) {
@@ -103,6 +105,8 @@ export  function Login() {
     </Form>
     <br />
     <Button onClick={loginGoogle}>Login with Google</Button>
+    <Button onClick={logout}>Logout</Button>
+    <h3>Don't have an account yet? <Link to={"/auth/register"}>Register</Link> </h3>
     </Container>
   )
 }

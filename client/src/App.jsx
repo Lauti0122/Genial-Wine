@@ -1,18 +1,30 @@
 import './App.css';
+import { useEffect, useState } from 'react';
 import { Routes, Route} from 'react-router-dom';
 import { Home, About, NotFound, Wines } from './pages';
 import { Login, Register } from "./pages/Auth";
 import { NavBar } from './components/NavBar';
+import { onAuthStateChanged } from 'firebase/auth';
+import {auth} from './firebase/index'
 
 export default function App() {
+
+  
+  const [logged, setLogged] = useState(false);
+
+  useEffect(() => {
+     onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
+  }, [])
+
 
   return (
     
 <>
-    <NavBar/>
+   {/*  {logged  && <NavBar/>  } */}
+   <NavBar/>
     <Routes>
       <Route index element={<Home/>}/>
-      <Route path="/auth/*"> 
+      <Route path="/auth/*" > 
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Route>
