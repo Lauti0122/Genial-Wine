@@ -19,6 +19,16 @@ const postUser = async (req, res) => {
   }
 }
 
+const getUsers =  async (req, res) => {
+  try {
+    const users = await User.findAll();
+    return res.json(users);
+  }
+  catch (error) {
+      return res.status(404).json({ message: error.message });
+  }
+}
+
 const getUser = async (req, res) => {
   try {
     const { email } = req.params;
@@ -63,6 +73,7 @@ const updateUser = async (req, res) => {
 
 module.exports = {
   postUser,
+  getUsers,
   getUser,
   updateUser
 }
