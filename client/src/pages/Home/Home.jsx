@@ -56,11 +56,12 @@ export  function Home() {
   useEffect(() => {
     dispatch(getUsers());
     onAuthStateChanged(auth, (user) => {
-      let fullname = user.displayName.split(" ");
+      let fullname = user?.displayName.split(" ");
       setLoginInfo({
         name: fullname[0],
         lastname: fullname[1],
-        email: user.email
+        email: user.email,
+        photo: user.photoURL
       })
     })
   }, [])
