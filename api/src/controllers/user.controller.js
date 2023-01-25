@@ -2,9 +2,9 @@ const { User } = require("../db");
 
 const postUser = async (req, res) => {
   try {
-    const { name, lastname, email, country } = req.body;
+    const { name, lastname, email } = req.body;
 
-    if (!name || !lastname || !email || !country) return res.status(400).json({ message: "Missing data" });
+    if (!name || !lastname || !email) return res.status(400).json({ message: "Missing data" });
 
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) return res.status(400).json({ message: "Invalid email" });
 
