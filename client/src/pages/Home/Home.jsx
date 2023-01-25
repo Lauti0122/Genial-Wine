@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { doc, setDoc, onSnapshot, query, collection, getDoc, getDocs } from 'firebase/firestore'
+import { doc, setDoc, collection, getDocs } from 'firebase/firestore'
 import { db } from "../../firebase";
 import { v4 as uuid } from "uuid";
 
 export  function Home() {
-
+  
+  
   const [ input, setInput ] = useState({
     id: "",
     nombre: "",

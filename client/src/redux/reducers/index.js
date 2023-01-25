@@ -1,14 +1,16 @@
-import { POST_USER } from '../actions'
+import { POST_USER, GET_USER } from '../actions'
+
 
 const initialState = {
-    users: []
+    users: [],
+    user: {}
 }
 
-export default function rootReducer(state = initialState, actions) {
+export default function rootReducer(state = initialState, action) {
 
-    switch (actions.type) {
+    switch (action.type) {
         case POST_USER: return { ...state }
-
+        case GET_USER: return { ...state, user: action.payload }
         default: return { ...state }
     }
 }

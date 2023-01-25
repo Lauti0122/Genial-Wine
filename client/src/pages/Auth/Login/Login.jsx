@@ -5,35 +5,41 @@ import {Container, Form, Button} from 'semantic-ui-react';
 import {useFormik} from 'formik';
 import {initialValues, validationSchema} from './Login.data'
 import {useDispatch} from 'react-redux'
+import {postUser} from '../../../redux/actions/index'
 
 export  function Login() {
 
   const [logged, setLogged] = useState(false);
   const dispatch = useDispatch();
 
+
+
   useEffect(() => {
         onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
+    
       }, [])
 
  const loginGoogle = async () => {
+
     try { 
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
 
-      console.log(result.user);
       let fullName = result.user.displayName
       fullName = fullName.split(" ")
+
       
-      // dispatch(postUser({
-      //     name: fullName[0],
-      //     lastname: fullName[1],
-      //     email: result.user.email
-      // }))
-      
-      
+      dispatch(postUser({
+          name: fullName[0],
+          lastname: fullName[1],
+          email: result.user.email,
+          country:"Argentina"
+          
+      }))
+    
     }
     catch (error) {
-      console.log(error);
+      console.log(`error1: ${error}`);
     }
   }
 
