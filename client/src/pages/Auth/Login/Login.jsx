@@ -3,7 +3,7 @@ import { auth } from '../../../firebase';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { Container, Form, Button } from 'semantic-ui-react';
 import { useFormik } from 'formik';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link  } from "react-router-dom";
 import { initialValues, validationSchema } from './Login.data'
 
 
