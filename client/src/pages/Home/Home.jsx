@@ -56,13 +56,15 @@ export  function Home() {
   useEffect(() => {
     dispatch(getUsers());
     onAuthStateChanged(auth, (user) => {
-      let fullname = user?.displayName.split(" ");
-      setLoginInfo({
-        name: fullname[0],
-        lastname: fullname[1],
-        email: user.email,
-        photo: user.photoURL
-      })
+      if (user.displayName) {
+        let fullname = user?.displayName.split(" ");
+        setLoginInfo({
+          name: fullname[0],
+          lastname: fullname[1],
+          email: user.email,
+          photo: user.photoURL
+        })
+      } 
     })
    
   }, [])
@@ -72,7 +74,6 @@ export  function Home() {
       const userFound = users?.find(u => u.email === loginInfo.email);
       if (!userFound) dispatch(postUser(loginInfo));
     }
-    console.log(loginInfo)
   }, [loginInfo])
   
 

@@ -22,7 +22,7 @@ export function NavBar() {
   }, [])
 
   useEffect(() => {
-  dispatch(getUserByEmail(emailUser))
+    if (emailUser !== "") dispatch(getUserByEmail(emailUser))
   }, [emailUser])
   
 
@@ -33,7 +33,13 @@ export function NavBar() {
         <NavLink to='/wines'>Wines</NavLink>
         <NavLink to='/about'>About</NavLink>
         <NavLink to='/bejudge'>Be Judge</NavLink>
-        {logged ? <img src={user.photo} alt="avatar" />  : <NavLink to="/auth/login">Sign In</NavLink> }
+        {logged ? 
+          <>
+            <span>{user.name} {user.lastname}</span>
+            <img src={user.photo} alt="avatar" /> 
+          </>
+          : <NavLink to="/auth/login">Sign In</NavLink>
+        }
       </Container>
     </nav>
   )

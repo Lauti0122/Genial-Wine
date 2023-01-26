@@ -42,6 +42,7 @@ export  function Login() {
     onSubmit: async (formValue)=>{
         try {
                 const result = await signInWithEmailAndPassword(auth, formValue.email, formValue.password);
+                navigate("/");
                 console.log(result, "logueado");
               
       }catch(error){

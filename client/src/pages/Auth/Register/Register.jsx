@@ -1,16 +1,17 @@
 import React from 'react'
-import {Container, Form, Button} from 'semantic-ui-react'
-import {useFormik} from 'formik'
-import {initialValues, validationSchema} from './Register.data'
-import {auth} from '../../../firebase'
-import {createUserWithEmailAndPassword} from 'firebase/auth'
-import {useDispatch} from 'react-redux'
-import {postUser} from '../../../redux/actions'
+import { Container, Form, Button } from 'semantic-ui-react'
+import { useFormik } from 'formik'
+import { initialValues, validationSchema } from './Register.data'
+import { auth } from '../../../firebase'
+import { createUserWithEmailAndPassword} from 'firebase/auth'
+import { useDispatch } from 'react-redux'
+import { postUser } from '../../../redux/actions'
+import { useNavigate } from 'react-router-dom';
 
 export  function Register() {
 
   const dispatch = useDispatch()
-
+  const navigate = useNavigate("/auth/login");
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -20,12 +21,12 @@ export  function Register() {
       try{
         await createUserWithEmailAndPassword(auth, formValue.email, formValue.password);
         dispatch(postUser({
-        name:formValue.name,
-        lastname:formValue.lastname,
-        email:formValue.email,
-        country:formValue.country
+          name:formValue.name,
+          lastname:formValue.lastname,
+          email:formValue.email,
+          country:formValue.country
         }))
-        console.log("user registered")
+        navigate("/auth/login");
        
       }catch(error){
         //MOSTRAR ERROR
