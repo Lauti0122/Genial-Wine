@@ -1,11 +1,9 @@
 import './App.css';
-import { useEffect, useState } from 'react';
 import { Routes, Route} from 'react-router-dom';
 import { Home, About, NotFound, Wines } from './pages';
+import {ResetPassword} from './components/Auth'
 import { Login, Register } from "./pages/Auth";
 import { NavBar } from './components/NavBar';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase/index';
 import { useLocation } from 'react-router-dom';
 
 export default function App() {
@@ -20,6 +18,7 @@ export default function App() {
           <Route path="/auth/*" > 
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path='reset-password' element={<ResetPassword/>}/>
           </Route>
           <Route path='/wines' element={<Wines/>}/>
           <Route path='/about' element={<About/>}/>

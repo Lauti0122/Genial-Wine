@@ -64,6 +64,7 @@ export  function Home() {
         photo: user.photoURL
       })
     })
+   
   }, [])
 
   useEffect(() => {
@@ -71,6 +72,7 @@ export  function Home() {
       const userFound = users?.find(u => u.email === loginInfo.email);
       if (!userFound) dispatch(postUser(loginInfo));
     }
+    console.log(loginInfo)
   }, [loginInfo])
   
 

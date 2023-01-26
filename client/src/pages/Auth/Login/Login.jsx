@@ -34,6 +34,7 @@ export  function Login() {
     await signOut(auth);
   }
 
+
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: validationSchema(),
@@ -91,6 +92,7 @@ export  function Login() {
     <br />
     <Button onClick={loginGoogle}>Login with Google</Button>
     <Button onClick={logout}>Logout</Button>
+    <h3><Link to={"/auth/reset-password"}>Forgot Password?</Link></h3>
     <h3>Don't have an account yet? <Link to={"/auth/register"}>Register</Link> </h3>
     </Container>
   )
