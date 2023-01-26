@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../../firebase';
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { Container, Form, Button } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import { useNavigate, Link  } from "react-router-dom";
@@ -9,13 +9,13 @@ import { initialValues, validationSchema } from './Login.data'
 
 export  function Login() {
 
-  const [logged, setLogged] = useState(false);
+  // const [logged, setLogged] = useState(false);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
-  }, [])
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
+  // }, [])
 
 
  const loginGoogle = async () => {
@@ -30,9 +30,7 @@ export  function Login() {
     }
   }
 
-  const logout = async () => {
-    await signOut(auth);
-  }
+
 
 
   const formik = useFormik({
@@ -70,7 +68,7 @@ export  function Login() {
       height: "100vh"
     }}>
       <h1>Login</h1>
-      {logged ? "Iniciado" : "No iniciado"}
+
     <Form  style={{width:"30%"}} onSubmit={formik.handleSubmit}>
 
     <Form.Input
@@ -92,7 +90,6 @@ export  function Login() {
     </Form>
     <br />
     <Button onClick={loginGoogle}>Login with Google</Button>
-    <Button onClick={logout}>Logout</Button>
     <h3><Link to={"/auth/reset-password"}>Forgot Password?</Link></h3>
     <h3>Don't have an account yet? <Link to={"/auth/register"}>Register</Link> </h3>
     </Container>

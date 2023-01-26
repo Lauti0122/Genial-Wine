@@ -16,11 +16,12 @@ import { auth } from '../../../firebase';
 import { useSelector, useDispatch } from "react-redux";
 import { getUserByEmail } from "../../../redux/actions/index";
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export  function AccountMenu() {
 
+  const navigate = useNavigate();
   const [emailUser, setEmailUser] = useState("");
 
   const dispatch = useDispatch()
@@ -50,6 +51,8 @@ export  function AccountMenu() {
 
     const logout = async () => {
       await signOut(auth);
+      navigate("/")
+
     }
   
   return (
