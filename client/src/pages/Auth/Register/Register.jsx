@@ -24,7 +24,8 @@ export  function Register() {
           name:formValue.name,
           lastname:formValue.lastname,
           email:formValue.email,
-          country:formValue.country
+          country:formValue.country,
+          photo:"https://firebasestorage.googleapis.com/v0/b/genial-wine.appspot.com/o/logo.png?alt=media&token=2cb43561-757d-4e10-939b-44b6608e746c"
         }))
         navigate("/auth/login");
        

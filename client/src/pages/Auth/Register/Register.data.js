@@ -7,6 +7,7 @@ export function initialValues() {
         country: "",
         email: "",
         password: "",
+        photo: "",
         repeatPassword: ""
     }
 }
