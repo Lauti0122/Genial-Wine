@@ -47,7 +47,7 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { email: paramEmail } = req.params;
-    const { city, cp, address, birthday, phone, photo, name, lastname } = req.body;
+    const { city, cp, address, birthday, phone, photo, name, lastname, admin } = req.body;
 
     const userExists = await User.findOne({ where: { email: paramEmail } });
 
@@ -62,7 +62,8 @@ const updateUser = async (req, res) => {
         address: address,
         birthday: birthday,
         phone: phone,
-        photo: photo
+        photo: photo,
+        admin: admin
       }, { where: { email: paramEmail } }
     );
 

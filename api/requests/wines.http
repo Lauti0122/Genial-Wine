@@ -15,7 +15,7 @@ Content-Type: application/json
   "stock": 20,
   "capacity": "750ml",
   "year": "2020",
-  "images": ["image"]
+  "images": ["https://www.vinoselkiosco.com/wp-content/uploads/2021/05/El_Enemigo_Malbec-edited.png"]
 }
 
 ### Wine 2
@@ -117,7 +117,7 @@ Content-Type: application/json
 "price":30.5,
 "type":"white",
 "stock":20,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Valle de Uco, Tunuyán",
 "description":"A la vista, presenta un color dorado, límpido y brillante.En nariz, despliega complejos aromas que recuerdan a durazno, membrillo y cáscara de mandarina con sutiles notas de anís y flor de lima.",
 "capacity":"750ml",
@@ -135,7 +135,7 @@ Content-Type: application/json
 "price": 18,
 "type":"red",
 "stock":15,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Altamira, San Carlos",
 "description":"Se perciben en este vino elegantes notas herbáceas y de anís aportadas por el Cabernet Franc, junto a vivaces frutos negros y especias conferidos por el Merlot y el Petit Verdot.",
 "capacity":"750ml",
@@ -153,7 +153,7 @@ Content-Type: application/json
 "price": 15.5 ,
 "type":"white",
 "stock": 30,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Altamira, San Carlos",
 "description":"Se perciben en este vino deliciosos sabores a frutos blancos y de durazno aportados por el Viognier, junto a delicadas notas florales típicas de la variedad Gewürztraminer y frescos dejos cítricos propios del Sauvignon Blanc.",
 "capacity":"750ml",
@@ -171,7 +171,7 @@ Content-Type: application/json
 "price":10.5 ,
 "type":"rose",
 "stock":10,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Lujan de Cuyo",
 "description":"De color rosa salmón con tintes cobre, aromas frescos, con notas florales y frutos rojos",
 "capacity":"750ml",
@@ -189,7 +189,7 @@ Content-Type: application/json
 "price": 12 ,
 "type":"rose",
 "stock": 15,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Valle de Uco, Tunuyán",
 "description":"Posee aromas florales que recuerdan a rosas y frutas rojas, como la cereza, frutilla y frambuesa",
 "capacity":"750ml",
@@ -207,7 +207,7 @@ Content-Type: application/json
 "price":25 ,
 "type":"rose",
 "stock":14,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Agrelo, Luján de Cuyo",
 "description":"De atractivo color rosa pétalo, muy elegante con brillantes reflejos. Posee gran expresión aromática que nos evoca a moras y guindas silvestres.",
 "capacity":"750ml",
@@ -225,7 +225,7 @@ Content-Type: application/json
 "price": 13 ,
 "type":"rose",
 "stock": 16,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Valle de Uco ",
 "description":"Flor de cerezo, granada, notas cítricas en nariz con una sensación en boca fresca y compleja.",
 "capacity":"750ml",
@@ -243,13 +243,14 @@ Content-Type: application/json
 "price": 105 ,
 "type":"red",
 "stock":3,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Perdriel, Luján de Cuyo",
 "description":"Un elegante e intenso rojo desagrega en tonos violáceos, concentra aromas de frutos negros, moras maduras y arándanos, aromatizados con regaliz y chocolate.",
 "capacity":"750ml",
 "grape_type":["Blend"],
 "year":"2015",
-"images":["https://www.espaciovino.com.ar/media/default/0001/54/thumb_53445_default_big.jpeg"]
+"images":["https://www.espaciovino.com.ar/media/default/0001/54/thumb_53445_default_big.jpeg"],
+" is_trending": true
 }
 
 ### Wine 15
@@ -261,13 +262,14 @@ Content-Type: application/json
 "price": 95 ,
 "type":"red",
 "stock": 5,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Paraje Altamira, Valle de Uco",
 "description":"Suelo aluvial supercalcáreo con piedras de gran tamaño cubiertas con carbonato de calcio que se encuentran en la superficie.",
 "capacity":"750ml",
 "grape_type":["Malbec"],
 "year":"2016",
-"images":["https://www.espaciovino.com.ar/media/default/0001/63/thumb_62982_default_big.jpeg"]
+"images":["https://www.espaciovino.com.ar/media/default/0001/63/thumb_62982_default_big.jpeg"],
+"is_trending": true
 }
 
 ### Wine 16
@@ -279,7 +281,7 @@ Content-Type: application/json
 "price": 80 ,
 "type":"red",
 "stock": 10,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"La Pirámide, Agrelo",
 "description":"Elegido el momento de la cosecha se seleccionan lotes en cada viñedo, luego se seleccionan plantas en cada lote elegido, luego los racimos que, una vez descobajados, terminan fermentando en pequeños barriles de roble francés, donde permanecen estacionados por aproximadamente 24 meses. Finalmente se seleccionan aquellos barriles que serán embotellados.",
 "capacity":"750ml",
@@ -297,13 +299,14 @@ Content-Type: application/json
 "price":78 ,
 "type":"red",
 "stock":6,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Agrelo",
 "description":"Aroma muy intenso, a frutos rojos como ciruelas, cerezas, fresas y frutillas, acompañado con vainillas, chocolate y tabaco, que le brinda el roble nuevo.",
 "capacity":"750ml",
 "grape_type":["Cabernet Sauvignon", " Merlot", "Malbec"],
 "year":"2013",
-"images":["https://www.espaciovino.com.ar/media/default/0001/63/thumb_62032_default_big.jpeg"]
+"images":["https://www.espaciovino.com.ar/media/default/0001/63/thumb_62032_default_big.jpeg"],
+"is_trending":true
 }
 
 ### Wine 18
@@ -315,7 +318,7 @@ Content-Type: application/json
 "price": 30 ,
 "type":"white",
 "stock": 5,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"El Peral, Valle de Uco",
 "description":"Esta variedad de uva necesita poco sol, el cuartel donde se encuentran estas vides está plantado con una irradiación no tan directa, con lo cual se ha logrado una maduración de la uva más lenta. Esto además ha permitido a la uva desarrollar una variedad de aromas más profundos, únicos.",
 "capacity":"750ml",
@@ -334,7 +337,7 @@ Content-Type: application/json
 "price": 50 ,
 "type":"white",
 "stock": 3,
-"country":"Provincia de Rio Negro",
+"country":"Rio Negro, Argentina",
 "region":"Mainque",
 "description":"El vino es intenso y enérgico, de tono alto y vivo, redondo y austero, refinado y mineral. Tiene una sensación en boca seca y una salinidad natural en la zona.",
 "capacity":"750ml",
@@ -352,7 +355,7 @@ Content-Type: application/json
 "price": 45 ,
 "type":"white",
 "stock": 4,
-"country":"Provincia de Mendoza",
+"country":"Mendoza, Argentina",
 "region":"Gualtallary, Tupungato, Valle de Uco",
 "description":"Su aroma remite a vivaces notas cítricas y de frutos blancos de carozo.",
 "capacity":"750ml",

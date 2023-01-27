@@ -51,6 +51,10 @@ module.exports = (sequelize) => {
     images: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },
+    is_trending: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     timestamps: false,
   });

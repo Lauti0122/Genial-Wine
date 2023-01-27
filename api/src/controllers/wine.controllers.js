@@ -30,7 +30,7 @@ const postWines = async (req, res) => {
 const updateWine = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, price, country, region, type, grape_type, description, stock, capacity, year, images } = req.body;
+    const { name, price, country, region, type, grape_type, description, stock, capacity, year, images, is_trending } = req.body;
 
     const wineExists = await Wine.findOne({ where: { id: id } });
 
@@ -48,7 +48,8 @@ const updateWine = async (req, res) => {
         stock: stock,
         capacity: capacity,
         year: year,
-        images: images
+        images: images,
+        is_trending: is_trending
       }, { where: { id } }
     );
 

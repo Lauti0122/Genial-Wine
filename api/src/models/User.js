@@ -41,6 +41,10 @@ module.exports = (sequelize) => {
     },
     photo: {
       type: DataTypes.STRING
+    },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     timestamps: false,
