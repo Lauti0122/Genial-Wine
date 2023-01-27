@@ -4,6 +4,7 @@ export const POST_USER = "POST_USER";
 export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
 export const UPDATE_USER = "UPDATE_USER";
+export const GET_ALL_WINES = "GET_ALL_WINES";
 
 export function postUser(user) {
 
@@ -55,7 +56,7 @@ export function getUserByEmail(email) {
 
 export function updateUser(data, email) {
 
-  // console.log(data, email)
+
   return async function (dispatch) {
     try {
 
@@ -68,6 +69,22 @@ export function updateUser(data, email) {
     }
     catch (error) {
       console.log(error);
+    }
+  }
+}
+
+//----------------WINES------------------
+
+export function getAllWines() {
+  return async function (dispatch) {
+    try {
+      const wines = await axios("/wines")
+      return dispatch({
+        type: GET_ALL_WINES,
+        payload: wines.data
+      })
+    } catch (error) {
+      console.log(error)
     }
   }
 }

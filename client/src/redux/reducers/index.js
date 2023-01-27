@@ -1,9 +1,10 @@
-import { POST_USER, GET_USER, GET_USERS, UPDATE_USER } from '../actions'
+import { POST_USER, GET_USER, GET_USERS, UPDATE_USER, GET_ALL_WINES } from '../actions'
 
 
 const initialState = {
     users: [],
-    user: {}
+    user: {},
+    wines: []
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -13,6 +14,7 @@ export default function rootReducer(state = initialState, action) {
         case GET_USERS: return { ...state, users: action.payload }
         case GET_USER: return { ...state, user: action.payload }
         case UPDATE_USER: return { ...state }
+        case GET_ALL_WINES: return { ...state, wines: action.payload }
         default: return { ...state }
     }
 }
