@@ -19,13 +19,13 @@ const postUser = async (req, res) => {
   }
 }
 
-const getUsers =  async (req, res) => {
+const getUsers = async (req, res) => {
   try {
     const users = await User.findAll();
     return res.json(users);
   }
   catch (error) {
-      return res.status(404).json({ message: error.message });
+    return res.status(404).json({ message: error.message });
   }
 }
 
@@ -47,7 +47,7 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { email: paramEmail } = req.params;
-    const { city, cp, address, birthday, phone, photo } = req.body;
+    const { city, cp, address, birthday, phone, photo, name, lastname } = req.body;
 
     const userExists = await User.findOne({ where: { email: paramEmail } });
 
@@ -55,6 +55,8 @@ const updateUser = async (req, res) => {
 
     const updatedUser = await User.update(
       {
+        name: name,
+        lastname: lastname,
         city: city,
         cp: cp,
         address: address,
