@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore'
-import { auth, db } from "../../firebase";
-import { v4 as uuid } from "uuid";
+import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, postUser } from "../../redux/actions";
-
 
 export  function Home() {
 

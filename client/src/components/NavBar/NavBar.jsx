@@ -6,6 +6,8 @@ import {auth} from "../../firebase/index";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserByEmail } from "../../redux/actions";
 import { AccountMenu } from "./AccountMenu/AccountMenu";
+import { Link } from "react-router-dom";
+import logo from '../../assets/genial.wine.png'
 
 export function NavBar() {
 
@@ -31,16 +33,12 @@ export function NavBar() {
   return (
     <nav>
       <Container >
+        <Link to={"/"}>
+        <img src={logo} alt="" />
+        </Link>
         <NavLink to='/wines'>Wines</NavLink>
         <NavLink to='/about'>About</NavLink>
         <NavLink to='/bejudge'>Be Judge</NavLink>
-        {/* {logged ? 
-          <>
-            <span>{user.name} {user.lastname}</span>
-            <img src={user.photo} alt="avatar" /> 
-          </>
-          : <NavLink to="/auth/login">Sign In</NavLink>
-        } */}
         {logged ? <AccountMenu/> :  <NavLink to="/auth/login">Sign In</NavLink>}
       </Container>
     </nav>

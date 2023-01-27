@@ -14,7 +14,7 @@ import Logout from '@mui/icons-material/Logout';
 import {signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../../firebase';
 import { useSelector, useDispatch } from "react-redux";
-import { getUserByEmail } from "../../../redux/actions/index";
+import { getUserByEmail, clearUser } from "../../../redux/actions/index";
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -23,12 +23,20 @@ export  function AccountMenu() {
 
   const navigate = useNavigate();
   const [emailUser, setEmailUser] = useState("");
+  const [userGoogle, setUserGoogle]= useState({name:"", photo:""})
 
   const dispatch = useDispatch()
   const user = useSelector(state => state.user);
 
   useEffect(() => {
      onAuthStateChanged(auth, (user) => {
+      if(user.hasOwnProperty("photoURL")){
+        const name = user.displayName.split(" ")[0]
+        setUserGoogle({
+          name,
+          photo: user.photoURL
+        })
+      }
       setEmailUser(user.email)
     });
   }, [])
@@ -51,15 +59,18 @@ export  function AccountMenu() {
 
     const logout = async () => {
       await signOut(auth);
+      dispatch(clearUser())
       navigate("/")
 
     }
   
   return (
     <React.Fragment>
+
+
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         
-        <Typography sx={{ minWidth: 100 }}>Hola, {user.name}</Typography>
+        <Typography sx={{ minWidth: 100 }}>Hola, {user.name || userGoogle.name}</Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -69,7 +80,7 @@ export  function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}><img style={{ width:"32px", height:"32px" }} src={user?.photo} alt="avatar" /></Avatar> 
+            <Avatar sx={{ width: 32, height: 32 }}><img style={{ width:"32px", height:"32px" }} src={user.photo || userGoogle.photo} alt="avatar" /></Avatar> 
           </IconButton>
         </Tooltip>
       </Box>

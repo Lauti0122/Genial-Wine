@@ -5,6 +5,7 @@ export const POST_USER = "POST_USER";
 export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
 export const UPDATE_USER = "UPDATE_USER";
+export const CLEAR_USER = "CLEAR_USER";
 
 //----------------WINES------------------
 export const GET_ALL_WINES = "GET_ALL_WINES";
@@ -84,6 +85,11 @@ export function updateUser(data, email) {
   }
 }
 
+export function clearUser() {
+  return {
+    type: CLEAR_USER
+  }
+}
 //----------------WINES------------------
 
 export function getAllWines() {
@@ -103,12 +109,12 @@ export function getAllWines() {
 //----------------CART------------------
 export function cartAction(id, type) {
   return {
-      type: type,
-      payload: id
+    type: type,
+    payload: id
   }
 }
 export function clearCart() {
   return {
-      type: CLEAR_CART
+    type: CLEAR_CART
   }
 }
