@@ -1,65 +1,97 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../../firebase';
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { Container, Form, Button } from 'semantic-ui-react';
+import { useFormik } from 'formik';
+import { useNavigate, Link  } from "react-router-dom";
+import { initialValues, validationSchema } from './Login.data'
 
-export function Login() {
 
-  const [input, setInput] = useState({
-    email: "",
-    contra: ""
-  })
+export  function Login() {
 
-  const [logged, setLogged] = useState(false);
+  // const [logged, setLogged] = useState(false);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
-  }, [])
-  
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setInput({...input, [e.target.name]: e.target.value})
-  }
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
+  // }, [])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    try {
-      const result = await signInWithEmailAndPassword(auth, input.email, input.contra);
-      console.log(result);
-    }
-    catch (error) {
-      console.log(error)
-    }
-  }
+ const loginGoogle = async () => {
 
-  const loginGoogle = async () => {
     try { 
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-
-      console.log(result.user);
+      await signInWithPopup(auth, provider);
+      navigate('/');
     }
     catch (error) {
-      console.log(error);
+      console.log(`error1: ${error}`);
     }
   }
 
-  const logout = async () => {
-    await signOut(auth);
-  }
+
+
+
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
+
+    onSubmit: async (formValue)=>{
+        try {
+                const result = await signInWithEmailAndPassword(auth, formValue.email, formValue.password);
+                navigate("/");
+                console.log(result, "logueado");
+              
+      }catch(error){
+        if(error.code === 'auth/user-not-found'){
+          console.log("User not found")
+        }
+        if(error.code === 'auth/wrong-password'){
+          console.log("Incorrect password")
+        }
+        else{
+          console.log(error.code);
+        }
+      }
+    }
+  })
 
   return (
-    <>
-      {logged ? "Iniciado" : "No iniciado"}
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type="email" name="email" value={input.email} onChange={handleChange} />
-        <label>Contraseña</label>
-        <input type="password" name="contra" value={input.contra} onChange={handleChange} />
-        <button>Enviar</button>
-      </form>
-      <p>Crack! tambien te podes unir con google <button type="button" onClick={loginGoogle}>Soy GOOGLE</button></p>
-      <p><button type="button" onClick={logout}>Deslogearse</button></p>
-    </>
+    <Container
+    style={{
+      textAlign:"center",
+      display:"flex",
+      alignItems:"center",
+      flexDirection:"column",
+      justifyContent:"center",
+      height: "100vh"
+    }}>
+      <h1>Login</h1>
+
+    <Form  style={{width:"30%"}} onSubmit={formik.handleSubmit}>
+
+    <Form.Input
+     type='text' 
+     placeholder="email..." 
+     name="email" 
+     onChange={formik.handleChange} 
+     error={formik.errors.email && true}
+    />
+
+    <Form.Input
+     type='password' 
+     placeholder="password..." 
+     name="password" 
+     onChange={formik.handleChange} 
+     error={formik.errors.password && true}
+    />
+    <Button type='submit'>Login</Button>
+    </Form>
+    <br />
+    <Button onClick={loginGoogle}>Login with Google</Button>
+    <h3><Link to={"/auth/reset-password"}>Forgot Password?</Link></h3>
+    <h3>Don't have an account yet? <Link to={"/auth/register"}>Register</Link> </h3>
+    </Container>
   )
 }

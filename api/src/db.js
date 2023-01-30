@@ -55,9 +55,12 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// const { } = sequelize.models;
+const { Orders, User } = sequelize.models;
 
 // Aca vendrian las relaciones
+//1:N (User - Orders)
+// Orders.belongsTo(User);
+// User.hasMany(Orders);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
