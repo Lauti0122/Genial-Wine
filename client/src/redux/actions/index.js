@@ -12,6 +12,7 @@ export const IS_LOGGED = "IS_LOGGED";
 export const GET_ALL_WINES = "GET_ALL_WINES";
 export const GET_WINE = "GET_WINE";
 export const FILTER_WINES = "FILTER_WINES";
+export const ORDER_WINES = "ORDER_WINES";
 
 //----------------CART------------------
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -116,10 +117,17 @@ export function getAllWines() {
   }
 }
 
-export function filterWines(byType, byGrape) {
+export function filterWines(byType, byGrape, byName) {
   return {
     type: FILTER_WINES,
-    payload: { byType, byGrape }
+    payload: { byType, byGrape, byName }
+  }
+}
+
+export function orderWines(sort) {
+  return {
+    type: ORDER_WINES,
+    payload: sort
   }
 }
 
@@ -147,6 +155,7 @@ export function cartAction(id, type) {
     payload: id
   }
 }
+
 export function clearCart() {
   return {
     type: CLEAR_CART

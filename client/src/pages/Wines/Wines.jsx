@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { filterWines, getAllWines } from '../../redux/actions';
+import { filterWines, getAllWines, orderWines } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { WineCard } from '../../components/WineCard';
 import { ContainerWine, Container } from './Wines.Style';
@@ -12,15 +12,25 @@ export  function Wines() {
   const wines = useSelector(state => state.wines)
   const [byType, setByType] = useState("");
   const [byGrape, setByGrape] = useState("");
+  const [name, setName] = useState("");
 
   const handleFilterByType = (e) => {
     setByType(e.target.value)
-    dispatch(filterWines(e.target.value, byGrape));
+    dispatch(filterWines(e.target.value, byGrape, null));
   }
 
   const handleFilterByGrape = (e) => {
     setByGrape(e.target.value);
-    dispatch(filterWines(byType, e.target.value));
+    dispatch(filterWines(byType, e.target.value, null));
+  }
+
+  const handleOrder = (e) => {
+    dispatch(orderWines(e.target.value));
+  }
+
+  const handleChangeName = (e) => {
+    setName(e.target.value);
+    dispatch(filterWines(byType, byGrape, e.target.value));
   }
 
   useEffect(() => {
@@ -48,6 +58,13 @@ export  function Wines() {
             ))
           }
         </select>
+        <label style={{ marginLeft: 12}}>Order</label>
+        <select name="order" onChange={handleOrder}>
+          <option disabled value="">Order wines</option>
+          <option value="low">Low Price</option>
+          <option value="high">High Price</option>
+        </select>
+        <input style={{ marginLeft: 42}} type="text" value={name} placeholder="Search by name..." onChange={handleChangeName} />
       </div>
       <p>Quantity of wines {wines.length}</p>
       <Container>

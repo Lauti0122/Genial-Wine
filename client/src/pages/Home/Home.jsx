@@ -15,15 +15,17 @@ export  function Home() {
   useEffect(() => {
     dispatch(getUsers());
     onAuthStateChanged(auth, (user) => {
-      if (user && user.displayName) {
+      if (user) {
         dispatch(isLogged(user ? true : false));
-        let fullname = user.displayName.split(" ");
-        setLoginInfo({
-          name: fullname[0],
-          lastname: fullname[1],
-          email: user.email,
-          photo: user.photoURL
-        })
+        if (user.displayName) {
+          let fullname = user.displayName.split(" ");
+          setLoginInfo({
+            name: fullname[0],
+            lastname: fullname[1],
+            email: user.email,
+            photo: user.photoURL
+          });
+        }
       } 
     })
    

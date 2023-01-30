@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+import Cart from './components/Cart/Cart';
 
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
 					  </ProtectedRoute>
           } />
           <Route path='/wine/:id' element={<WineDetail/>}/>
+          <Route path="/cart" element={<Cart />} />
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </>

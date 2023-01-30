@@ -11,6 +11,7 @@ import logo from '../../assets/genial.wine.png'
 import audio from '../../assets/music.mp3';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 export function NavBar() {
@@ -53,6 +54,7 @@ export function NavBar() {
         <NavLink to='/wines'>Wines</NavLink>
         <NavLink to='/about'>About</NavLink>
         <NavLink to='/bejudge'>Be Judge</NavLink>
+        <NavLink to ="/cart"><ShoppingCartIcon /></NavLink>
         {playMusic ? <MusicNoteIcon onClick={handlePause}/> :  <MusicOffIcon onClick={handlePlay} /> }
         <audio  id="music" loop ref={refAudio}  >
           <source src={audio} type="audio/mpeg" />
