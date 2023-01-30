@@ -71,7 +71,6 @@ export function getUserByEmail(email) {
 
 export function updateUser(data, email) {
 
-
   return async function (dispatch) {
     try {
 
@@ -87,11 +86,6 @@ export function updateUser(data, email) {
     }
   }
 }
-
-return {
-  type: RESET_USER
-}
-
 
 export function isLogged(user) {
   return {
