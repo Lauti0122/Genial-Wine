@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, isLogged, postUser } from "../../redux/actions";
+import { getUsers, isLogged, postUser, getTrendingWines } from "../../redux/actions";
+import {TrendingProducts} from '../../components'
 
 
 export  function Home() {
@@ -10,10 +11,12 @@ export  function Home() {
 
   const dispatch = useDispatch();
   const users = useSelector(state => state.users);
+  const trendingWines = useSelector(state=> state.trendingWines)
   const [ loginInfo, setLoginInfo ] = useState({});
 
   useEffect(() => {
     dispatch(getUsers());
+    dispatch(getTrendingWines());
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(isLogged(user ? true : false));
@@ -40,7 +43,8 @@ export  function Home() {
   
 
   return (
-    <>
+    <>  
+    <TrendingProducts trendingWines={trendingWines}/>
     </>
   )
 }

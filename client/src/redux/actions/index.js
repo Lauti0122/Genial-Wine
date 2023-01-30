@@ -13,6 +13,7 @@ export const GET_ALL_WINES = "GET_ALL_WINES";
 export const GET_WINE = "GET_WINE";
 export const FILTER_WINES = "FILTER_WINES";
 export const ORDER_WINES = "ORDER_WINES";
+export const GET_TRENDING_WINES = "GET_TRENDING_WINES";
 
 //----------------CART------------------
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -143,6 +144,20 @@ export function getWineByID(id) {
       })
 
     } catch (e) {
+      console.log(error)
+    }
+  }
+}
+
+export function getTrendingWines() {
+  return async function (dispatch) {
+    try {
+      const trendingWines = await axios("/wines/trending")
+      return dispatch({
+        type: GET_TRENDING_WINES,
+        payload: trendingWines.data
+      })
+    } catch (error) {
       console.log(error)
     }
   }
