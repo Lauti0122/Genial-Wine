@@ -60,8 +60,23 @@ const updateWine = async (req, res) => {
   }
 }
 
+const getWineByID = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+
+    const wine = await Wine.findByPk(id)
+
+    wine ? res.status(201).json(wine) : res.status(400).json({ message: "Wine not found" })
+
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getWines,
   postWines,
-  updateWine
+  updateWine,
+  getWineByID
 }
