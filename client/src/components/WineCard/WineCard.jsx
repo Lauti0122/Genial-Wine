@@ -1,8 +1,17 @@
 import React from 'react';
 import { Container } from './WineCardStyle';
 import { Link } from 'react-router-dom';
+import { cartAction } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 export function WineCard({ id, name, price, country, region, type, grape_type, capacity, images, year }) {
+
+  const dispatch = useDispatch();
+
+  const addToCart = (id) => {
+    dispatch(cartAction(id, "ADD_TO_CART"));
+  }
+
   return (
     <Container>
       <Link to={`/wine/${id}`}>
@@ -22,9 +31,8 @@ export function WineCard({ id, name, price, country, region, type, grape_type, c
         })}
         <p>Capacity: {capacity}</p>
         <p>Year: {year}</p>
-
       </Link>
-
+        <button type="button" onClick={() => addToCart(id)}>Add to cart</button>
     </Container>
   )
 }
