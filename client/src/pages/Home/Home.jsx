@@ -39,7 +39,6 @@ export  function Home() {
 
   return (
     <>
-        
     </>
   )
 }
