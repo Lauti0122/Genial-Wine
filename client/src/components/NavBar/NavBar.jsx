@@ -12,6 +12,7 @@ import audio from '../../assets/music.mp3';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 
+
 export function NavBar() {
 
   const isLogged = useSelector(state => state.isLogged);

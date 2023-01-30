@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Container, Form, Button } from 'semantic-ui-react'
 import { useFormik } from 'formik'
 import { initialValues, validationSchema } from './Register.data'
@@ -6,12 +6,30 @@ import { auth } from '../../../firebase'
 import { createUserWithEmailAndPassword} from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { postUser } from '../../../redux/actions'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export  function Register() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate("/auth/login");
+
+
+  const notify = (errors) => toast(errors, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true, 
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
+  
+  const [errors, setErrors] = useState("");
+
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -32,10 +50,14 @@ export  function Register() {
       }catch(error){
         //MOSTRAR ERROR
         if (error.code === 'auth/email-already-in-use'){
-          console.log("email aleady exists")
+          
+          setErrors("Email already exists");
+          notify("Email already exists");
         }
         if(error.code === 'auth/weak-password'){
-          console.log("Password should be at least 6 characters")
+          
+          setErrors("Password should be at least 6 characters");
+          notify("Password should be at least 6 characters");
         }
         else{
           console.log(error.code)
@@ -47,6 +69,10 @@ export  function Register() {
   })
 
   return (
+    <>
+      <Link to="/" style={{ margin:"20px"}}>
+          <ArrowBackIosIcon style={{ marginTop:"20px" }}/>
+      </Link>
     <Container
     style={{
       textAlign:"center",
@@ -56,6 +82,8 @@ export  function Register() {
       justifyContent:"center",
       height: "100vh"
     }}>
+    
+      {errors ? <ToastContainer /> : null }
       <h1>Register</h1>
     <Form style={{width:"30%"}} onSubmit={formik.handleSubmit}>
     <Form.Input
@@ -110,5 +138,6 @@ export  function Register() {
     </Form>
 
     </Container>
+    </>
   )
 }

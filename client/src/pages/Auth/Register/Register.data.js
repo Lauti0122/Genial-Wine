@@ -23,7 +23,8 @@ export function validationSchema() {
 
         email: Yup.string().email().required(),
 
-        password: Yup.string().required().min(6, "Please enter a name more than 6 character"),
+        password: Yup.string().required(),
+        // .min(6, "Please enter a name more than 6 character"),
 
         repeatPassword: Yup.string()
             .required()
