@@ -5,11 +5,12 @@ export const POST_USER = "POST_USER";
 export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
 export const UPDATE_USER = "UPDATE_USER";
-export const RESET_USER = "RESET_USER";
+export const CLEAR_USER = "CLEAR_USER";
 export const IS_LOGGED = "IS_LOGGED";
 
 //----------------WINES------------------
 export const GET_ALL_WINES = "GET_ALL_WINES";
+export const GET_WINE = "GET_WINE";
 export const FILTER_WINES = "FILTER_WINES";
 
 //----------------CART------------------
@@ -87,16 +88,21 @@ export function updateUser(data, email) {
   }
 }
 
-export function resetUser() {
-  return {
-      type: RESET_USER
-  }
+return {
+  type: RESET_USER
 }
+
 
 export function isLogged(user) {
   return {
     type: IS_LOGGED,
     payload: user
+  }
+}
+
+export function clearUser() {
+  return {
+    type: CLEAR_USER
   }
 }
 
@@ -123,15 +129,32 @@ export function filterWines(byType, byGrape) {
   }
 }
 
+export function getWineByID(id) {
+
+  return async function (dispatch) {
+    try {
+      const wine = await axios.get(`/wines/${id}`);
+
+      return dispatch({
+        type: GET_WINE,
+        payload: wine.data
+      })
+
+    } catch (e) {
+      console.log(error)
+    }
+  }
+}
+
 //----------------CART------------------
 export function cartAction(id, type) {
   return {
-      type: type,
-      payload: id
+    type: type,
+    payload: id
   }
 }
 export function clearCart() {
   return {
-      type: CLEAR_CART
+    type: CLEAR_CART
   }
 }

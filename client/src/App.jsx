@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import { Routes, Route} from 'react-router-dom';
-import { Home, About, NotFound, Wines } from './pages';
+import { Home, About, NotFound, Wines, WineDetail } from './pages';
 import {ResetPassword} from './components/Auth'
 import { Login, Register, MyProfile } from "./pages/Auth";
 import { NavBar } from './components/NavBar';
@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+
 
 export default function App() {
 
@@ -40,6 +41,7 @@ export default function App() {
               <MyProfile/>
 					  </ProtectedRoute>
           } />
+          <Route path='/wine/:id' element={<WineDetail/>}/>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </>
