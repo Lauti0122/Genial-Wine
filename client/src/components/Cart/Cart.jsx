@@ -15,7 +15,8 @@ const Cart = () => {
           <div>
             <span>Vino: {item.name} x{item.quantity} | <button onClick={() => dispatch(cartAction(item.id, "ADD_TO_CART"))}>+</button><button onClick={() => dispatch(cartAction(item.id, "REMOVE_ONE_FROM_CART"))}>-</button> | </span>
             <span>Precio unitario: ${item.price} | </span>
-            <span>Precio total: ${parseFloat(item.price * item.quantity).toFixed(2)}</span>
+            <span>Precio total: ${parseFloat(item.price * item.quantity).toFixed(2)} | </span>
+            <button onClick={() => dispatch(cartAction(item.id, "REMOVE_ALL_FROM_CART"))}>Eliminar</button>
           </div>
         ))
         : <p>The cart is empty</p>
