@@ -5,13 +5,13 @@ export  function WineCard({id,name,price,country,region,type,grape_type,capacity
   return (
     <Container>
 
-            <img src={images[0]} alt="" width="250px" height="250px" />
+            <img src={images[0]} alt="" width="160px" height="180px" />
             <h4>{name}</h4>
-            <h4>Price: {price} USD</h4>
-            <h4>Country: {country}</h4>
-            <h4>Region: {region}</h4>
-            <h4>Type: {type}</h4>
-            <h4>Grape Type:</h4>
+            <p>Price: {price} USD</p>
+            <p>Country: {country}</p>
+            <p>Region: {region}</p>
+            <p>Type: {type}</p>
+            <p>Grape Type:</p>
             {grape_type.map ((gt, i) =>{
                 return (
                     <div key={i}>
@@ -21,8 +21,8 @@ export  function WineCard({id,name,price,country,region,type,grape_type,capacity
             })}
               
             
-            <h4>Capacity: {capacity}</h4>
-            <h4>Year: {year}</h4>
+            <p>Capacity: {capacity}</p>
+            <p>Year: {year}</p>
 
 
 

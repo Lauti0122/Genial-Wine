@@ -14,7 +14,7 @@ import Logout from '@mui/icons-material/Logout';
 import {signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../../firebase';
 import { useSelector, useDispatch } from "react-redux";
-import { getUserByEmail } from "../../../redux/actions/index";
+import { getUserByEmail, isLogged, resetUser } from "../../../redux/actions/index";
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ export  function AccountMenu() {
 
   useEffect(() => {
      onAuthStateChanged(auth, (user) => {
-      setEmailUser(user.email)
+      if (user) setEmailUser(user.email);
     });
   }, [])
 
@@ -37,9 +37,6 @@ export  function AccountMenu() {
     if (emailUser !== "") dispatch(getUserByEmail(emailUser))
   }, [])
   
-
-
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -49,11 +46,12 @@ export  function AccountMenu() {
     setAnchorEl(null);
   };
 
-    const logout = async () => {
-      await signOut(auth);
-      navigate("/")
-
-    }
+  const logout = async () => {
+    await signOut(auth);
+    dispatch(resetUser());
+    dispatch(isLogged(false));
+    navigate("/")
+  }
   
   return (
     <React.Fragment>

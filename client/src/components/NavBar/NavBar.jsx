@@ -9,7 +9,7 @@ import { AccountMenu } from "./AccountMenu/AccountMenu";
 
 export function NavBar() {
 
-  const [logged, setLogged] = useState(false);
+  const isLogged = useSelector(state => state.isLogged);
   const [emailUser, setEmailUser] = useState("");
 
   const dispatch = useDispatch()
@@ -17,8 +17,9 @@ export function NavBar() {
 
   useEffect(() => {
      onAuthStateChanged(auth, (user) => {
-      setLogged(user ? true : false)
-      setEmailUser(user.email)
+        if (user) {
+          setEmailUser(user.email)
+        }
     });
   }, [])
 
@@ -41,7 +42,7 @@ export function NavBar() {
           </>
           : <NavLink to="/auth/login">Sign In</NavLink>
         } */}
-        {logged ? <AccountMenu/> :  <NavLink to="/auth/login">Sign In</NavLink>}
+        {isLogged ? <AccountMenu/> :  <NavLink to="/auth/login">Sign In</NavLink>}
       </Container>
     </nav>
   )

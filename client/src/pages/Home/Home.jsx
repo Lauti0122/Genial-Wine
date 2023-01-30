@@ -4,7 +4,7 @@ import { auth, db } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, postUser } from "../../redux/actions";
+import { getUsers, isLogged, postUser } from "../../redux/actions";
 
 
 export  function Home() {
@@ -14,12 +14,12 @@ export  function Home() {
   const [ loginInfo, setLoginInfo ] = useState({});
 
 
-
   useEffect(() => {
     dispatch(getUsers());
     onAuthStateChanged(auth, (user) => {
-      if (user.displayName) {
-        let fullname = user?.displayName.split(" ");
+      if (user && user.displayName) {
+        dispatch(isLogged(user ? true : false));
+        let fullname = user.displayName.split(" ");
         setLoginInfo({
           name: fullname[0],
           lastname: fullname[1],
