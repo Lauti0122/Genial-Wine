@@ -3,9 +3,22 @@ const { Wine } = require("../db");
 const getWines = async (req, res) => {
   try {
     const wines = await Wine.findAll();
-    res.status(201).json(wines);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
+    
+    return res.status(201).json(wines);
+  } 
+  catch (error) {
+    return res.status(404).json({ message: error.message });
+  }
+}
+
+const getTrendingWines = async (req, res) => {
+  try {
+    const wines = await Wine.findAll({ where: { is_trending: true }});
+    
+    res.json(wines);
+  }
+  catch (error) {
+    return res.status(404).json({ message: error.message });
   }
 }
 
@@ -62,6 +75,7 @@ const updateWine = async (req, res) => {
 
 module.exports = {
   getWines,
+  getTrendingWines,
   postWines,
   updateWine
 }
