@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container } from './WineCardStyle';
+import {Link} from 'react-router-dom';
 
 export  function WineCard({id,name,price,country,region,type,grape_type,capacity,images,year}) {
   return (
     <Container>
-
+          <Link to={`/wine/${id}`}>
             <img src={images[0]} alt="" width="250px" height="250px" />
             <h4>{name}</h4>
             <h4>Price: {price} USD</h4>
@@ -24,7 +25,7 @@ export  function WineCard({id,name,price,country,region,type,grape_type,capacity
             <h4>Capacity: {capacity}</h4>
             <h4>Year: {year}</h4>
 
-
+            </Link>
 
     </Container>
   )

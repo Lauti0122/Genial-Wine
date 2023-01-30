@@ -20,6 +20,7 @@ export  function Wines() {
           <ContainerWine>
           <WineCard
             name={wine.name}
+            id={wine.id}
             price={wine.price}
             country={wine.country}
             region={wine.region}

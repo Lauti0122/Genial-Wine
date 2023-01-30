@@ -9,6 +9,7 @@ export const CLEAR_USER = "CLEAR_USER";
 
 //----------------WINES------------------
 export const GET_ALL_WINES = "GET_ALL_WINES";
+export const GET_WINE = "GET_WINE";
 
 //----------------CART------------------
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -101,6 +102,23 @@ export function getAllWines() {
         payload: wines.data
       })
     } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function getWineByID(id) {
+
+  return async function (dispatch) {
+    try {
+      const wine = await axios.get(`/wines/${id}`);
+
+      return dispatch({
+        type: GET_WINE,
+        payload: wine.data
+      })
+
+    } catch (e) {
       console.log(error)
     }
   }

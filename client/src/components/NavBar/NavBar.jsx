@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useState, useRef} from "react";
 import { NavLink } from "react-router-dom";
 import {Container} from "./NavBarStyles";
 import { onAuthStateChanged } from "firebase/auth";
@@ -8,8 +8,14 @@ import { getUserByEmail } from "../../redux/actions";
 import { AccountMenu } from "./AccountMenu/AccountMenu";
 import { Link } from "react-router-dom";
 import logo from '../../assets/genial.wine.png'
+import audio from '../../assets/music.mp3';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import MusicOffIcon from '@mui/icons-material/MusicOff';
 
 export function NavBar() {
+
+  const refAudio = useRef();
+  const [playMusic, setPlayMusic] = useState(false)
 
   const [logged, setLogged] = useState(false);
   const [emailUser, setEmailUser] = useState("");
@@ -28,7 +34,15 @@ export function NavBar() {
     if (emailUser !== "") dispatch(getUserByEmail(emailUser))
   }, [emailUser])
   
+  const handlePlay = () =>{
+    refAudio.current.play()
+    setPlayMusic(true)
+  }
 
+  const handlePause = () =>{
+    refAudio.current.pause()
+    setPlayMusic(false)
+  }
 
   return (
     <nav>
@@ -39,6 +53,12 @@ export function NavBar() {
         <NavLink to='/wines'>Wines</NavLink>
         <NavLink to='/about'>About</NavLink>
         <NavLink to='/bejudge'>Be Judge</NavLink>
+        {playMusic ? <MusicNoteIcon onClick={handlePause}/> :  <MusicOffIcon onClick={handlePlay} /> }
+
+        <audio  id="music" loop ref={refAudio}  >
+          <source src={audio} type="audio/mpeg" />
+        </audio>
+
         {logged ? <AccountMenu/> :  <NavLink to="/auth/login">Sign In</NavLink>}
       </Container>
     </nav>

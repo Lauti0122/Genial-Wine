@@ -1,10 +1,11 @@
-import { POST_USER, GET_USER, GET_USERS, UPDATE_USER, GET_ALL_WINES, ADD_TO_CART, REMOVE_ONE_FROM_CART, REMOVE_ALL_FROM_CART, CLEAR_CART, CLEAR_USER } from '../actions'
+import { POST_USER, GET_USER, GET_USERS, UPDATE_USER, GET_ALL_WINES, ADD_TO_CART, REMOVE_ONE_FROM_CART, REMOVE_ALL_FROM_CART, CLEAR_CART, CLEAR_USER, GET_WINE } from '../actions'
 
 
 const initialState = {
     users: [],
     user: {},
     wines: [],
+    wine: {},
     cart: []
 }
 
@@ -20,6 +21,7 @@ export default function rootReducer(state = initialState, action) {
 
         //----------------WINES---------------
         case GET_ALL_WINES: return { ...state, wines: action.payload }
+        case GET_WINE: return { ...state, wine: action.payload }
 
         //----------------CART---------------
         case ADD_TO_CART: {

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, postUser } from "../../redux/actions";
 
+
 export  function Home() {
+
 
   const dispatch = useDispatch();
   const users = useSelector(state => state.users);
   const [ loginInfo, setLoginInfo ] = useState({});
 
-
+  
 
   useEffect(() => {
     dispatch(getUsers());
@@ -38,7 +40,7 @@ export  function Home() {
 
   return (
     <>
-     
+   
     </>
   )
 }
