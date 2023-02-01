@@ -7,6 +7,7 @@ const Cart = () => {
   const cartItems = useSelector(state => state.cart);
   const dispatch = useDispatch()
 
+  console.log(cartItems)
   return (
     <>
       {

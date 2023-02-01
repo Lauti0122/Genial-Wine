@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from './WineCardStyle';
+import { Container, ContImage } from './WineCardStyle';
 import { Link } from 'react-router-dom';
 import { cartAction } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
@@ -14,22 +14,22 @@ export function WineCard({ id, name, price, country, region, type, grape_type, c
 
   return (
     <Container>
-      <Link to={`/wine/${id}`}>
-        <img src={images[0]} alt="" width="160px" height="180px" />
+      <Link to={`/wine/${id}`} style={{ color:'black' }}>
+        <ContImage>
+          <img src={images[0]} alt="" width="160px" height="180px" />
+        </ContImage>
         <h4>{name}</h4>
-        <p>Price: {price} USD</p>
-        <p>Country: {country}</p>
-        <p>Region: {region}</p>
+        <p>Price: ${price}</p>
+        <span>Country: {country}, {region}</span>
         <p>Type: {type}</p>
-        <p>Grape Type:</p>
+        {/* <p>Grape Type:</p>
         {grape_type.map((gt, i) => {
           return (
             <div key={i}>
               {`${gt}`}
             </div>
           )
-        })}
-        <p>Capacity: {capacity}</p>
+        })} */}
         <p>Year: {year}</p>
       </Link>
         <button type="button" onClick={() => addToCart(id)}>Add to cart</button>

@@ -1,0 +1,32 @@
+.card{
+    border: 1px solid black;
+    border-radius: 8px;
+
+    height: 400px;
+}
+
+.App{
+    width: 70%;
+    margin: 0 auto;
+    margin-top:50px;
+}
+
+
+/* .slick-slide > div {
+    margin: 0 20px;
+} */
+
+.slick-list {
+    margin-right:2em; 
+    
+}
+
+.cardTop h1{
+    font-size: 1.5rem;
+}
+
+.cardTop > img{
+    width: 30%;
+    height: 30%;
+    object-fit: cover;
+}
