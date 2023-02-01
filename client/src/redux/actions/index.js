@@ -21,6 +21,9 @@ export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 
+//----------------ORDER------------------
+export const POST_ORDER = "POST_ORDER";
+
 
 //----------------USER------------------
 export function postUser(user) {
@@ -174,5 +177,24 @@ export function cartAction(id, type) {
 export function clearCart() {
   return {
     type: CLEAR_CART
+  }
+}
+
+//----------------ORDERS------------------
+
+export function postOrder(order) {
+  return async function (dispatch) {
+    try {
+      const newOrder = await axios.post("/orders/post", order)
+
+      return dispatch({
+        type: POST_ORDER,
+        payload: newOrder.data
+      })
+
+    }
+    catch (error) {
+      console.log(`error2: ${error.response.data.message}`)
+    }
   }
 }

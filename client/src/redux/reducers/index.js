@@ -1,4 +1,4 @@
-import { POST_USER, GET_USER, GET_USERS, UPDATE_USER, GET_ALL_WINES, ADD_TO_CART, REMOVE_ONE_FROM_CART, REMOVE_ALL_FROM_CART, CLEAR_CART, FILTER_WINES, IS_LOGGED, CLEAR_USER, GET_WINE, ORDER_WINES, GET_TRENDING_WINES } from '../actions';
+import { POST_USER, GET_USER, GET_USERS, UPDATE_USER, GET_ALL_WINES, ADD_TO_CART, REMOVE_ONE_FROM_CART, REMOVE_ALL_FROM_CART, CLEAR_CART, FILTER_WINES, IS_LOGGED, CLEAR_USER, GET_WINE, ORDER_WINES, GET_TRENDING_WINES, POST_ORDER } from '../actions';
 
 const initialState = {
   users: [],
@@ -9,6 +9,7 @@ const initialState = {
   filterWines: [],
   cart: [],
   isLogged: false,
+  orders: []
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -96,6 +97,9 @@ export default function rootReducer(state = initialState, action) {
       return { ...state, cart: state.cart.filter(i => i.id !== action.payload) }
     }
     case CLEAR_CART: return { ...state, cart: [] }
+
+    //----------------ORDERS---------------
+    case POST_ORDER: return { ...state }
 
     default: return { ...state }
   }
