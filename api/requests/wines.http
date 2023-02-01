@@ -363,3 +363,60 @@ Content-Type: application/json
   "year":"2019",
   "images":["https://www.espaciovino.com.ar/media/default/0001/68/thumb_67504_default_big.jpeg"]
 }
+
+### Wine 21
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name":"Catena Zapata Malbec Argentino",
+  "price": 98 ,
+  "type":"red",
+  "stock": 14,
+  "country":"Mendoza, Argentina",
+  "region":"Distrito de La Consulta",
+  "description":"El Catena Zapata Malbec Argentino Catena presenta un profundo e intenso color violeta.",
+  "capacity":"750ml",
+  "grape_type":["Malbec"],
+  "year":"2018",
+  "images":["https://www.espaciovino.com.ar/media/default/0001/64/thumb_63296_default_big.jpeg"],
+  "is_trending": true
+}
+
+### Wine 22
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name":"Escarlata Evolution",
+  "price": 55 ,
+  "type":"white",
+  "stock": 11,
+  "country":"Salta, Argentina",
+  "region":"Cafayate",
+  "description":"Color amarillo dorado intenso, ciertos vestigios acerados en su matiz. Nariz con una generosa paleta aromática: cítricos, cáscara de naranja, notas de flores blancas, miel; al abrirse parece una sutil presencia de tilo y ciertos aromas balsámicos. En boca es fresco, con una buena acidez que acompaña la cremosidad del medio de boca. Hay concentración y voluptuosidad, con final persistente y ágil. Al gusto repite el carácter cítrico.",
+  "capacity":"750ml",
+  "grape_type":["Torrontés"],
+  "year":"2018",
+  "images":["https://www.espaciovino.com.ar/media/default/0001/64/thumb_63462_default_big.jpeg"],
+  "is_trending": true
+}
+
+### Wine 23
+POST {{api}}/wines
+Content-Type: application/json
+
+{
+  "name":"Saint Felicien Rosé",
+  "price": 60 ,
+  "type":"white",
+  "stock": 11,
+  "country":"Mendoza, Argentina",
+  "region":"Rivadavia",
+  "description":"Es un vino fresco, color rosa pálido con reflejos cobrizos.En nariz presenta dejos a hierbas mediterráneas, con notas de tomillo, azahar y pimienta rosa junto a frutilla y pomelo rosado.",
+  "capacity":"750ml",
+  "grape_type":["Grenache", "Syrah", "Malbec"],
+  "year":"2017",
+  "images":["https://www.espaciovino.com.ar/media/default/0001/61/thumb_60660_default_big.jpeg"],
+  "is_trending": true
+}
