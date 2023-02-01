@@ -134,7 +134,7 @@ export  function MyProfile() {
         />
 
         <Form.Input
-             type='text' 
+             type='date' 
              placeholder="birthday..." 
              name="birthday" 
              onChange={formik.handleChange}

@@ -8,6 +8,8 @@ export const Container = styled.div`
 export const ContainerWine = styled.div`
   margin:3vw;
   width:24rem;
-  height: 44rem;
+  height: 35rem;
+  padding: 2rem;
+  display:flex;
   box-shadow: 0px 10px 10px -6px black;
 `
