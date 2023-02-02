@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { Wine } = require("../db");
 
 const base = "https://api-m.sandbox.paypal.com";
 
@@ -6,7 +7,13 @@ const createPaymentMP = async (payer, products) => {
 
   const url = "https://api.mercadopago.com/checkout/preferences";
 
-  const items = products.map(product => {
+  const items = products.map((product) => {
+    
+    Wine.findOne({ where: { id: product.id }})
+      .then(wine => wine.stock > 0 ? Wine.update({ stock: (wine.stock - product.quantity)}, { where: { id: product.id }}) : null)
+      .catch(error => console.log(error))
+    // await Wine.update({ stock: wineFound.stock - product.quantity}, { where: { id: product.id }});
+
     return {
       id: product.id,
       title: product.name,

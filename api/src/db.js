@@ -55,12 +55,21 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Orders, User } = sequelize.models;
+const { Order, User, Wine, OrderItem } = sequelize.models;
 
 // Aca vendrian las relaciones
-//1:N (User - Orders)
-// Orders.belongsTo(User);
-// User.hasMany(Orders);
+
+//1:N (Order - OrderItem)
+OrderItem.belongsTo(Order);
+Order.hasMany(OrderItem);
+
+//1:N (OrderItem - Wine)
+OrderItem.belongsTo(Wine);
+
+//1:N (Order - User)
+Order.belongsTo(User);
+User.hasMany(Order);
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
