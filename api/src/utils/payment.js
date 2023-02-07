@@ -8,9 +8,9 @@ const createPaymentMP = async (payer, products) => {
   const url = "https://api.mercadopago.com/checkout/preferences";
 
   const items = products.map((product) => {
-    
-    Wine.findOne({ where: { id: product.id }})
-      .then(wine => wine.stock > 0 ? Wine.update({ stock: (wine.stock - product.quantity)}, { where: { id: product.id }}) : null)
+
+    Wine.findOne({ where: { id: product.id } })
+      .then(wine => wine.stock > 0 ? Wine.update({ stock: (wine.stock - product.quantity) }, { where: { id: product.id } }) : null)
       .catch(error => console.log(error))
     // await Wine.update({ stock: wineFound.stock - product.quantity}, { where: { id: product.id }});
 
@@ -31,7 +31,12 @@ const createPaymentMP = async (payer, products) => {
       email: payer.email
     },
     items: items,
-    back_urls: {}
+    back_urls: {
+      success: "http://127.0.0.1:5173/",
+      failure: "http://127.0.0.1:5173/",
+      pending: "http://127.0.0.1:5173/",
+    },
+    auto_return: "all"
   };
 
   const payment = await axios.post(url, body, {
@@ -104,8 +109,8 @@ const capturePaymentPP = async (token) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-  console.log(response);
-  return response.data;
+    console.log(response);
+    return response.data;
   }
   catch (error) {
     console.log(error);
@@ -114,7 +119,7 @@ const capturePaymentPP = async (token) => {
 
 const generateAccessToken = async () => {
   const auth = Buffer.from(process.env.PP_CLIENT_ID + ":" + process.env.PP_SECRET).toString("base64");
-  const response = await axios.post(`${base}/v1/oauth2/token`, "grant_type=client_credentials", { 
+  const response = await axios.post(`${base}/v1/oauth2/token`, "grant_type=client_credentials", {
     headers: {
       Authorization: `Basic ${auth}`,
     },

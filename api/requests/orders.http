@@ -1,0 +1,12 @@
+@api = http://localhost:4000/api
+
+### order_item 1
+POST {{api}}/orders
+Content-Type: application/json
+
+{
+  "total":150,
+  "payment_method":"paypal",
+  "userId":"86ad4b6c-1926-4006-9627-3130342667ac"
+
+}

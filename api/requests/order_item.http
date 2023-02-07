@@ -1,0 +1,12 @@
+@api = http://localhost:4000/api
+
+### order_item 1
+POST {{api}}/order_items
+Content-Type: application/json
+
+{
+  "total_price":41,
+  "quantity":2 ,
+  "wineId":"2e139b3c-a569-4aba-a6f1-a882aa4714c8",
+  "orderId":"1"
+}

@@ -55,7 +55,7 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Order, User, Wine, OrderItem } = sequelize.models;
+const { Order, User, Wine, OrderItem, Shipping } = sequelize.models;
 
 // Aca vendrian las relaciones
 
@@ -69,6 +69,9 @@ OrderItem.belongsTo(Wine);
 //1:N (Order - User)
 Order.belongsTo(User);
 User.hasMany(Order);
+
+//1:1 (Order - Shipping)
+Shipping.belongsTo(Order);
 
 
 module.exports = {
