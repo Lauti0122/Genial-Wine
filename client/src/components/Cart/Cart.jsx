@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { cartAction } from '../../redux/actions';
 
 const Cart = () => {
   
+  const navigate = useNavigate();
   const cartItems = useSelector(state => state.cart);
   const dispatch = useDispatch()
 
-  console.log(cartItems)
   return (
     <>
       {
@@ -22,6 +23,7 @@ const Cart = () => {
         ))
         : <p>The cart is empty</p>
       }
+      <button type="text" onClick={() => navigate("/payment")}>Buy</button>
     </>
   )
 }

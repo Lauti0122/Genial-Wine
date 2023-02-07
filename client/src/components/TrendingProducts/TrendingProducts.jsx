@@ -1,50 +1,41 @@
 import React from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { WineCard } from "../WineCard";
-import { ContainerTrendingWine, ContImageWine,CardTrending, StyledSlider } from "./TrendingProducts.Style";
+import { ContainerTrendingWine, ContImageWine, CardTrending, StyledSlider } from "./TrendingProducts.Style";
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos'
 import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos'
 
 let slidesToShow = 3
 
 
-export  function TrendingProducts({trendingWines}) {
+export function TrendingProducts({ trendingWines }) {
 
 
 
   function SampleNextArrow(props) {
-    const { className, style, onClick, currentSlide, slideCount } = props;
+    const { className, onClick } = props;
     return (
-      <>
-        { currentSlide !== slideCount-slidesToShow && (
-          <div className={className} onClick={onClick}>
-            <ArrowForwardIos style={{ color:"black", fontSize:"30px" }} />
-          </div>
-        ) }
-        </>
+      <div className={className} onClick={onClick}>
+        <ArrowForwardIos style={{ color: "black", fontSize: "60px", marginTop: "-40px" }} />
+      </div>
     );
   }
 
-  
+
   function SamplePrevArrow(props) {
-    const { className, style, onClick, currentSlide } = props;
+    const { className, onClick } = props;
     return (
-      <>
-      { currentSlide !== 0 && (
-        <div className={className} onClick={onClick}>
-          <ArrowBackIos style={{ color:"black", fontSize:"30px" }}/>
-        </div>
-        )}
-      </>
+      <div className={className} onClick={onClick}>
+        <ArrowBackIos style={{ color: "black", fontSize: "60px", marginTop: "-40px" }} />
+      </div>
     );
   }
 
   const settings = {
     dots: true,
-    infinite: false,
-    arrows: true,
+    infinite: true,
     speed: 500,
     slidesToShow: slidesToShow,
     slidesToScroll: 3,
@@ -81,33 +72,28 @@ export  function TrendingProducts({trendingWines}) {
 
   return (
     <ContainerTrendingWine>
-      <StyledSlider { ...settings } >
-      {trendingWines.map( wine => (
-        <CardTrending >
-          <ContImageWine>
-            <WineCard
-             id={wine.id}
-             name={wine.name}
-             price={wine.price}
-             country={wine.country}
-             region={wine.region}
-             type={wine.type}
-             grape_type={wine.grape_type}
-             description={wine.description}
-             capacity={wine.capacity}
-             year={wine.year}
-             images={wine.images}
-            />
-          </ContImageWine>
-      
-        </CardTrending>
-      ))}
+      <StyledSlider {...settings} >
+        {trendingWines.map(wine => (
+          <CardTrending >
+            <ContImageWine>
+              <WineCard
+                id={wine.id}
+                name={wine.name}
+                price={wine.price}
+                country={wine.country}
+                region={wine.region}
+                type={wine.type}
+                grape_type={wine.grape_type}
+                description={wine.description}
+                capacity={wine.capacity}
+                year={wine.year}
+                images={wine.images}
+              />
+            </ContImageWine>
+
+          </CardTrending>
+        ))}
       </StyledSlider>
-    </ContainerTrendingWine> 
-
-
+    </ContainerTrendingWine>
   )
 }
-
-
-

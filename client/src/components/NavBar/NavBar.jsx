@@ -4,7 +4,7 @@ import {Container} from "./NavBarStyles";
 import { onAuthStateChanged } from "firebase/auth";
 import {auth} from "../../firebase/index";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserByEmail } from "../../redux/actions";
+import { getUserByEmail, isLogged } from "../../redux/actions";
 import { AccountMenu } from "./AccountMenu/AccountMenu";
 import { Link } from "react-router-dom";
 import logo from '../../assets/genial.wine.png'
@@ -13,10 +13,9 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-
 export function NavBar() {
 
-  const isLogged = useSelector(state => state.isLogged);
+  const logged = useSelector(state => state.isLogged);
   const refAudio = useRef();
   const [playMusic, setPlayMusic] = useState(false)
   const [emailUser, setEmailUser] = useState("");
@@ -25,6 +24,7 @@ export function NavBar() {
 
   useEffect(() => {
      onAuthStateChanged(auth, (user) => {
+      dispatch(isLogged(user ? true : false))
         if (user) {
           setEmailUser(user.email)
         }
@@ -59,7 +59,7 @@ export function NavBar() {
         <audio  id="music" loop ref={refAudio}  >
           <source src={audio} type="audio/mpeg" />
         </audio>
-        {isLogged ? <AccountMenu/> :  <NavLink to="/auth/login">Sign In</NavLink>}
+        {logged ? <AccountMenu/> :  <NavLink to="/auth/login">Sign In</NavLink>}
       </Container>
     </nav>
   )

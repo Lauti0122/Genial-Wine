@@ -20,10 +20,13 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
+export const GET_CART = "GET_CART";
 
 //----------------ORDER------------------
 export const POST_ORDER = "POST_ORDER";
 
+//----------------PAYMENT------------------
+export const CREATE_PAYMENT = "CREATE_PAYMENT";
 
 //----------------USER------------------
 export function postUser(user) {
@@ -180,6 +183,7 @@ export function clearCart() {
   }
 }
 
+
 //----------------ORDERS------------------
 
 export function postOrder(order) {
@@ -195,6 +199,26 @@ export function postOrder(order) {
     }
     catch (error) {
       console.log(`error2: ${error.response.data.message}`)
+    }
+  }
+}
+
+//----------------PAYMENT------------------
+export function createPayment(method, payer, products) {
+  console.log(payer);
+  console.log(products);
+  return async function (dispatch) {
+    try {
+      if (method === "mercado_pago") {
+        const newPayment = await axios.post("/payment/mp", {payer, products});
+        return dispatch({
+          type: CREATE_PAYMENT,
+          payload: newPayment.data
+        })
+      }
+    }
+    catch (error) {
+      console.log(error)
     }
   }
 }

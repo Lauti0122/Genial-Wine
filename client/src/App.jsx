@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import Cart from './components/Cart/Cart';
+import Payment from './components/Payment/Payment';
 
 
 export default function App() {
@@ -29,7 +30,14 @@ export default function App() {
           <Route index element={<Home/>}/>
           <Route path="/home" element={<Home/>} />
           <Route path="/auth/*" > 
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={
+              <ProtectedRoute 
+                isAllowed={logged}
+                redirectTo="/"
+              >
+                <Login />
+              </ProtectedRoute>
+            }  />
             <Route path="register" element={<Register />} />
             <Route path='reset-password' element={<ResetPassword/>}/>
           </Route>
@@ -37,12 +45,13 @@ export default function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/my-profile' element={
             <ProtectedRoute 
-              isAllowed={logged && logged}
+              isAllowed={logged}
 					  >
               <MyProfile/>
 					  </ProtectedRoute>
           } />
           <Route path='/wine/:id' element={<WineDetail/>}/>
+          <Route path="/payment" element={<Payment />} />
           <Route path="/cart" element={<Cart />} />
           <Route path='*' element={<NotFound/>}/>
         </Routes>

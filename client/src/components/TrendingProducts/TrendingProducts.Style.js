@@ -30,11 +30,18 @@ export const ContImageWine = styled.div`
 export const StyledSlider = styled(Slider)`
     
     .slick-slide > div {
-        margin: 0 10px !important;
+        margin: 0 40px !important;
     }
 
     .slick-list{
-        margin: 0 -10px ;
+        margin: 0 -6px ;
     }
-   
+
+    .slick-prev, .slick-next {
+      font-size: 15px !important;
+    }
+
+  .slick-prev:before, .slick-next:before  {
+    content: '' !important;
+  }
 `

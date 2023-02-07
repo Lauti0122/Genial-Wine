@@ -2,12 +2,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, isLogged, postUser, getTrendingWines } from "../../redux/actions";
+import { getUsers, isLogged, postUser, getTrendingWines, getUserByEmail } from "../../redux/actions";
 import {TrendingProducts} from '../../components'
 
 
 export  function Home() {
-
 
   const dispatch = useDispatch();
   const users = useSelector(state => state.users);
@@ -20,6 +19,7 @@ export  function Home() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(isLogged(user ? true : false));
+        dispatch(getUserByEmail(user.email));
         if (user.displayName) {
           let fullname = user.displayName.split(" ");
           setLoginInfo({
