@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, redirect } from 'react-router-dom';
-import { createPayment } from '../../redux/actions';
-import PaymentStepper from '../Stepper/Stepper';
 
-const Payment = () => {
-
-  const dispatch = useDispatch();
-  const payment_info = useSelector(state => state.payment_info);
-  const cart = useSelector(state => state.cart);
-  const user = useSelector(state => state.user);
+const ShippingForm = () => {
 
   const [input, setInput] = useState({
     email: "",
@@ -20,25 +11,8 @@ const Payment = () => {
     phone: ""
   });
 
-  const [method, setMethod] = useState("");
-
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value  });
-  }
-
-  const handleChangeMethod = (e) => {
-    const products = cart.map(item => {
-      return {
-        id: item.id,
-        name: item.name,
-        images: item.images[0],
-        quantity: item.quantity,
-        price: item.price,
-        total_price: item.price * item.quantity
-      }
-    });
-    dispatch(createPayment(e.target.value, products)); 
-    setMethod(e.target.value);
   }
 
   const handleSubmit = (e) => {
@@ -47,13 +21,6 @@ const Payment = () => {
     console.log(input);
   }
 
-  const finish = (input) => {
-
-  }
-
-  // const redirect = (url) => {
-  //   window.open(url);
-  // }
 
   return (
     <div>
@@ -79,18 +46,11 @@ const Payment = () => {
         <br />
         <button>Aceptar</button>
       </form>
-      <h2>Payment Method</h2>
-      <select name="method" onChange={handleChangeMethod} defaultValue="">
-        <option disabled value="">Method</option>
-        <option value="mercado_pago">Mercado Pago</option>
-        <option value="paypal">PayPal</option>
-      </select>
       <br />
-      <PaymentStepper />
       {/* <button onClick={(() => redirect(payment_info.init_point)} disabled={!payment_info)}>Finalizar compra</button> */}
       {/* <button type="button" target="_blank" onClick={() => window.location.href = payment_info?.init_point}>Checkout</button> */}
     </div>
   )
 }
 
-export default Payment;
+export default ShippingForm;

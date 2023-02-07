@@ -210,7 +210,7 @@ export function createPayment(method, payer, products) {
   return async function (dispatch) {
     try {
       if (method === "mercado_pago") {
-        const newPayment = await axios.post("/payment/mp", {payer, products});
+        const newPayment = await axios.post("/payment/mp", products);
         return dispatch({
           type: CREATE_PAYMENT,
           payload: newPayment.data
