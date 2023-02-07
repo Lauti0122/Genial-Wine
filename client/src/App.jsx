@@ -11,14 +11,20 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import Cart from './components/Cart/Cart';
 import Payment from './components/Payment/Payment';
+import {useDispatch, useSelector} from 'react-redux';
+import { isLogged } from './redux/actions'
 
 
 export default function App() {
 
-   const [logged, setLogged] = useState(false);
+  //  const [logged, setLogged] = useState(false);
+  const dispatch = useDispatch();
+
+  const logged = useSelector(state => state.isLogged) 
 
    useEffect(() => {
-     onAuthStateChanged(auth, (user) => setLogged(user ? true : false));
+     onAuthStateChanged(auth, (user) => dispatch(isLogged(user ? true : false)));
+
    }, [])
 
   const location = useLocation();
