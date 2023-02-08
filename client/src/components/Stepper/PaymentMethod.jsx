@@ -10,14 +10,9 @@ const PaymentMethod = ({activeStep, handleBack, handleNext, steps}) => {
   const dispatch = useDispatch();
   const paymentInfo = useSelector((state => state.payment_info))
 
-
-
   const cart = useSelector(state => state.cart);
 
-
   const [method, setMethod] = useState("");
-
-
 
   const handleChangeMethod = (e) => {
     const products = cart.map(item => {
@@ -27,12 +22,11 @@ const PaymentMethod = ({activeStep, handleBack, handleNext, steps}) => {
         images: item.images[0],
         quantity: item.quantity,
         price: item.price,
-        // total_price: item.price * item.quantity
+        total_price: item.price * item.quantity
       }
     });
   
-    
-    dispatch(createCheckout(e.target.value, products)); 
+    dispatch(createCheckout(e.target.value, { products: products })); 
     setMethod(e.target.value);
   }
 

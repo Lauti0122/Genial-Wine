@@ -172,6 +172,7 @@ export function getTrendingWines() {
 
 //----------------CART------------------
 export function cartAction(id, type) {
+  console.log(id);
   return {
     type: type,
     payload: id
@@ -206,8 +207,6 @@ export function postOrder(order) {
 
 //----------------PAYMENT------------------
 export function createCheckout(method, products) {
-  console.log(products)
-
   return async function (dispatch) {
     try {
       if (method === "mercado_pago") {
@@ -219,7 +218,7 @@ export function createCheckout(method, products) {
       }
     }
     catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 }

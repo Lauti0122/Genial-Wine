@@ -9,12 +9,11 @@ export function WineCard({ id, name, price, country, region, type, grape_type, c
   const dispatch = useDispatch();
 
   const addToCart = (id) => {
-
     dispatch(cartAction(id, "ADD_TO_CART"));
   }
 
   return (
-    <Container>
+    <Container key={id}>
       <Link to={`/wine/${id}`} style={{ color:'black' }}>
         <ContImage>
           <img src={images[0]} alt="" width="160px" height="180px" />

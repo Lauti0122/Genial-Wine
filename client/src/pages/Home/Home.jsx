@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, isLogged, postUser, getTrendingWines, getUserByEmail } from "../../redux/actions";
+import { getUsers, isLogged, postUser, getTrendingWines, getUserByEmail, getAllWines } from "../../redux/actions";
 import {TrendingProducts} from '../../components'
 
 
@@ -15,6 +15,7 @@ export  function Home() {
 
   useEffect(() => {
     dispatch(getUsers());
+    dispatch(getAllWines());
     dispatch(getTrendingWines());
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -39,12 +40,12 @@ export  function Home() {
       const userFound = users?.find(u => u.email === loginInfo.email);
       if (!userFound) dispatch(postUser(loginInfo));
     }
-  }, [loginInfo])
+  }, [])
   
 
   return (
     <>  
-    <TrendingProducts trendingWines={trendingWines}/>
+      <TrendingProducts trendingWines={trendingWines}/>
     </>
   )
 }

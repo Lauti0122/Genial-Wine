@@ -76,7 +76,7 @@ export function TrendingProducts({ trendingWines }) {
     <ContainerTrendingWine>
       <StyledSlider {...settings} >
         {trendingWines.map(wine => (
-          <CardTrending >
+          <CardTrending key={wine.id}>
             <ContImageWine>
                 <WineCard
                   id={wine.id}

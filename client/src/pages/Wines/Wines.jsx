@@ -54,7 +54,7 @@ export  function Wines() {
           <option value="all">All</option>
           {
             grapes.map(grape => (
-              <option value={grape}>{grape}</option>
+              <option value={grape} key={grape}>{grape}</option>
             ))
           }
         </select>
@@ -72,7 +72,7 @@ export  function Wines() {
           wines.length > 0 
           ? wines.map(wine=>{
             return (
-              <ContainerWine>
+              <ContainerWine key={wine.id}>
                 <WineCard
                   id={wine.id}
                   name={wine.name}

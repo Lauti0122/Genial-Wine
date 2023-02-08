@@ -51,7 +51,7 @@ export default function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/my-profile' element={
             <ProtectedRoute 
-              isAllowed={logged}
+              isAllowed={!logged}
 					  >
               <MyProfile/>
 					  </ProtectedRoute>
