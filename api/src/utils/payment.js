@@ -3,7 +3,7 @@ const { Wine } = require("../db");
 
 const base = "https://api-m.sandbox.paypal.com";
 
-const createPaymentMP = async (payer, products) => {
+const createPaymentMP = async (products) => {
 
   const url = "https://api.mercadopago.com/checkout/preferences";
 
@@ -27,16 +27,13 @@ const createPaymentMP = async (payer, products) => {
   });
 
   const body = {
-    payer: {
-      email: payer.email
-    },
     items: items,
     back_urls: {
-      success: "http://127.0.0.1:5173/",
-      failure: "http://127.0.0.1:5173/",
-      pending: "http://127.0.0.1:5173/",
+      success: "http://localhost:4000/api/payment/mp/capture",
+      failure: "http://localhost:4000/api/payment/mp/capture",
+      pending: "http://localhost:4000/api/payment/mp/capture"
     },
-    auto_return: "all"
+    auto_return: "approved"
   };
 
   const payment = await axios.post(url, body, {
@@ -109,11 +106,10 @@ const capturePaymentPP = async (token) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response);
     return response.data;
   }
   catch (error) {
-    console.log(error);
+    return res.status(404).json({ message: error });
   }
 }
 

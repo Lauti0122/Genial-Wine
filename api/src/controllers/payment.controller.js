@@ -2,7 +2,8 @@ const { createPaymentMP, createOrderPP, capturePaymentPP } = require("../utils/p
 
 const makeOrderPP = async (req, res) => {
   try {
-    const order = await createOrderPP(req.body.wines);
+    const { products } = req.body;
+    const order = await createOrderPP(products);
     return res.json(order);
   }
   catch (error) {
@@ -23,11 +24,20 @@ const capturePayment = async (req, res) => {
 
 const makePaymentMP = async (req, res) => {
   try {
-    const { payer, products } = req.body;
-    const payment = await createPaymentMP(payer, products);
+    const { products } = req.body;
+    const payment = await createPaymentMP(products);
 
     return res.json(payment);
   }
+  catch (error) {
+    return res.status(404).json({ message: error });
+  }
+}
+
+const capturePaymentMP = async (req, res) => {
+  try {
+    return res.json(req.query);
+  } 
   catch (error) {
     return res.status(404).json({ message: error });
   }
@@ -40,6 +50,7 @@ const cancelPayment = async (req, res) => {
 module.exports = {
   makePaymentMP,
   makeOrderPP,
+  capturePaymentMP,
   capturePayment,
   cancelPayment
 }
