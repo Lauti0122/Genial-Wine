@@ -6,6 +6,7 @@ const wines = require("./wine.routes");
 const orders = require("./order.routes");
 const payment = require("./payment.routes");
 const orderItems = require("./orderItem.routes");
+const shipping = require("./shipping.routes");
 
 module.exports = router;
 
@@ -16,3 +17,4 @@ router.use("/wines", wines);
 router.use("/orders", orders);
 router.use("/payment", payment);
 router.use("/order_items", orderItems);
+router.use("/shipping", shipping)

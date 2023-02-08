@@ -10,23 +10,26 @@ module.exports = (sequelize) => {
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+
         },
         city: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         country: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         address: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         cp: {
             type: DataTypes.STRING
         },
         phone: {
             type: DataTypes.STRING,
+            allowNull: false,
         },
 
     }, {
