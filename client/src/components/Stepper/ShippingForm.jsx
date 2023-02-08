@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { setPaymentInfo } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-const ShippingForm = () => {
+const ShippingForm = ({activeStep, handleBack, handleNext, steps}) => {
+
+  const dispatch = useDispatch();
+  const paymentInfo = useSelector((state => state.payment_info))
 
   const [input, setInput] = useState({
     email: "",
@@ -15,17 +22,20 @@ const ShippingForm = () => {
     setInput({ ...input, [e.target.name]: e.target.value  });
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    input.cp = parseInt(input.cp);
-    console.log(input);
+  const handleSubmit = () => {
+    dispatch(setPaymentInfo({
+      ...paymentInfo,
+      shipping: input
+    }
+    ))
+    handleNext();
   }
 
+  
 
   return (
     <div>
-      <h2>Shipping address</h2>
-      <form onSubmit={handleSubmit}>
+      <form >
         <label>Email: </label>
         <input type="email" name="email" value={input.email} onChange={handleChange} />
         <br />
@@ -44,8 +54,21 @@ const ShippingForm = () => {
         <label>Phone: </label>
         <input type="text" name="phone" value={input.phone} onChange={handleChange} />
         <br />
-        <button>Aceptar</button>
       </form>
+        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
+              Back
+            </Button>
+            <Box sx={{ flex: '1 1 auto' }} />
+            <Button onClick={handleSubmit}>
+              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            </Button>
+          </Box>
       <br />
       {/* <button onClick={(() => redirect(payment_info.init_point)} disabled={!payment_info)}>Finalizar compra</button> */}
       {/* <button type="button" target="_blank" onClick={() => window.location.href = payment_info?.init_point}>Checkout</button> */}

@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { cartAction } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 
-export function WineCard({ id, name, price, country, region, type, grape_type, capacity, images, year }) {
+export function WineCard({ id, name, price, country, region, type, grape_type, capacity, images, year, key }) {
 
   const dispatch = useDispatch();
 
   const addToCart = (id) => {
+
     dispatch(cartAction(id, "ADD_TO_CART"));
   }
 

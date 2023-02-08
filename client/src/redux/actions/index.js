@@ -26,7 +26,8 @@ export const GET_CART = "GET_CART";
 export const POST_ORDER = "POST_ORDER";
 
 //----------------PAYMENT------------------
-export const CREATE_PAYMENT = "CREATE_PAYMENT";
+export const CREATE_CHECKOUT = "CREATE_CHECKOUT";
+export const SET_PAYMENT_INFO = "PAYMENT_INFO";
 
 //----------------USER------------------
 export function postUser(user) {
@@ -204,15 +205,15 @@ export function postOrder(order) {
 }
 
 //----------------PAYMENT------------------
-export function createPayment(method, payer, products) {
-  console.log(payer);
-  console.log(products);
+export function createCheckout(method, products) {
+  console.log(products)
+
   return async function (dispatch) {
     try {
       if (method === "mercado_pago") {
         const newPayment = await axios.post("/payment/mp", products);
         return dispatch({
-          type: CREATE_PAYMENT,
+          type: CREATE_CHECKOUT,
           payload: newPayment.data
         })
       }
@@ -221,4 +222,12 @@ export function createPayment(method, payer, products) {
       console.log(error)
     }
   }
+}
+
+export function setPaymentInfo(paymentInfo) {
+  return {
+    type: SET_PAYMENT_INFO,
+    payload: paymentInfo
+  }
+
 }

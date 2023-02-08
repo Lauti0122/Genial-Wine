@@ -1,4 +1,4 @@
-import { POST_USER, GET_USER, GET_USERS, UPDATE_USER, GET_ALL_WINES, ADD_TO_CART, REMOVE_ONE_FROM_CART, REMOVE_ALL_FROM_CART, CLEAR_CART, FILTER_WINES, IS_LOGGED, CLEAR_USER, GET_WINE, ORDER_WINES, GET_TRENDING_WINES, POST_ORDER, CREATE_PAYMENT } from '../actions';
+import { POST_USER, GET_USER, GET_USERS, UPDATE_USER, GET_ALL_WINES, ADD_TO_CART, REMOVE_ONE_FROM_CART, REMOVE_ALL_FROM_CART, CLEAR_CART, FILTER_WINES, IS_LOGGED, CLEAR_USER, GET_WINE, ORDER_WINES, GET_TRENDING_WINES, POST_ORDER, CREATE_CHECKOUT, SET_PAYMENT_INFO } from '../actions';
 
 const initialState = {
   users: [],
@@ -10,7 +10,11 @@ const initialState = {
   cart: [],
   isLogged: false,
   orders: [],
-  payment_info: {}
+  payment_info: {
+    shipping: {},
+    payment_method: ""
+  },
+  checkout: {}
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -103,7 +107,15 @@ export default function rootReducer(state = initialState, action) {
     case POST_ORDER: return { ...state }
 
     //----------------PAYMENT------------------
-    case CREATE_PAYMENT: return { ...state, payment_info: action.payload }
+    case CREATE_CHECKOUT: return { ...state, checkout: action.payload }
+
+    case SET_PAYMENT_INFO: return {
+      ...state,
+      payment_info: {
+        shipping: action.payload.shipping,
+        payment_method: action.payload.payment_method
+      }
+    }
 
     default: return { ...state }
   }

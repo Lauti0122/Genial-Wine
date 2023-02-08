@@ -12,6 +12,8 @@ let slidesToShow = 3
 
 export function TrendingProducts({ trendingWines }) {
 
+  
+
 
 
   function SampleNextArrow(props) {
@@ -76,19 +78,20 @@ export function TrendingProducts({ trendingWines }) {
         {trendingWines.map(wine => (
           <CardTrending >
             <ContImageWine>
-              <WineCard
-                id={wine.id}
-                name={wine.name}
-                price={wine.price}
-                country={wine.country}
-                region={wine.region}
-                type={wine.type}
-                grape_type={wine.grape_type}
-                description={wine.description}
-                capacity={wine.capacity}
-                year={wine.year}
-                images={wine.images}
-              />
+                <WineCard
+                  id={wine.id}
+                  name={wine.name}
+                  price={wine.price}
+                  country={wine.country}
+                  region={wine.region}
+                  type={wine.type}
+                  grape_type={wine.grape_type}
+                  description={wine.description}
+                  capacity={wine.capacity}
+                  year={wine.year}
+                  images={wine.images}
+                />
+              
             </ContImageWine>
 
           </CardTrending>
