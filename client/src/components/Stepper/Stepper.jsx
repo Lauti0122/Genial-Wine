@@ -5,8 +5,9 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
-import ShippingForm from './ShippingForm';
-import PaymentMethod from './PaymentMethod';
+import ShippingForm from './ShippingForm/ShippingForm';
+import PaymentMethod from './PaymentMethod/PaymentMethod';
+import PaymentDetail from './PaymentDetail';
 
 const steps = ['Shipping Info', 'Payment Method', 'Finish Payment'];
 
@@ -34,6 +35,7 @@ const PaymentStepper = () => {
     switch(step) {
       case 0: return <ShippingForm handleBack={handleBack} handleNext={handleNext}  activeStep={activeStep} steps={steps} />
       case 1: return <PaymentMethod handleBack={handleBack} handleNext={handleNext} activeStep={activeStep} steps={steps} /> 
+      case 2: return <PaymentDetail />
     }
   }
 
